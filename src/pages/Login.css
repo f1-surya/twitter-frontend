@@ -1,0 +1,63 @@
+.login {
+  background-color: #282c34;
+  color: white;
+  text-align: center;
+  padding: 30px;
+}
+
+#title {
+  padding: 20px;
+  font-size: 30px;
+  font-family: "Segoe UI Semibold", serif;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+#userName {
+  height: 30px;
+  background: inherit;
+  color: white;
+  font-size: 20px;
+  border: none;
+  width: 25%;
+  border-bottom: 1px solid white;
+}
+
+#password {
+  height: 30px;
+  background: inherit;
+  color: white;
+  font-size: 20px;
+  border: none;
+  width: 25%;
+  padding: 10px;
+  border-bottom: 1px solid white;
+}
+
+#button {
+  height: 45px;
+  width: 15%;
+  font-size: 20px;
+  background: #1DA1F2;
+  color: white;
+  border-radius: 10px;
+  border: none;
+}
+
+#createAccount {
+  padding: 10px;
+}
+
+#signUp {
+  color: #1DA1F2;
+  text-decoration: none;
+}
+
+#logo {
+  padding: 10px;
+}

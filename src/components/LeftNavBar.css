@@ -1,0 +1,90 @@
+#leftNavBar {
+  position: fixed;
+  text-align: center;
+  top: 0;
+  overflow-x: hidden;
+  width: 20%;
+  background: #353a42;
+  height: 100%;
+}
+
+.logoButton {
+  display: inline-block;
+}
+
+#leftNavBar a {
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+}
+
+.routes {
+  font-size: 20px;
+}
+
+.navBox {
+  padding-bottom: 50px;
+  padding-top: 20px;
+}
+
+.navDestiny {
+  color: white;
+}
+
+.navDestiny:hover {
+  color: royalblue;
+}
+
+#tweetButton {
+  background: #1DA1F2;
+  color: white;
+  width: 200px;
+  height: 50px;
+  border-radius: 30px;
+  border: none;
+  font-size: 20px;
+  font-family: "Segoe UI Semibold", serif;
+  cursor: pointer;
+}
+
+#formPopup {
+  left: 35%;
+  top: 10px;
+  display: none;
+  position: fixed;
+  border: 1px solid gray;
+  color: red;
+  z-index: 9;
+  width: 400px;
+  height: 200px;
+  background: black;
+}
+
+#tweetForm {
+  padding: 10px;
+  height: available;
+  width: available;
+}
+
+#tweetBox {
+  width: 90%;
+  min-height: 75px;
+  background: inherit;
+  padding: 10px;
+  color: white;
+}
+
+#post {
+  background: #1DA1F2;
+  right: 10px;
+  color: white;
+  width: 75px;
+  height: 30px;
+  border-radius: 10px;
+  bottom: 20px;
+  position: absolute;
+}
+
+::placeholder {
+  color: white;
+}

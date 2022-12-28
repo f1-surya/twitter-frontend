@@ -1,0 +1,34 @@
+#profileSection {
+  width: 50%;
+  position: relative;
+  left: 20%;
+}
+
+#userName {
+  font-size: 30px;
+  font-family: "Segoe UI Semibold", serif;
+  padding: 10px;
+}
+
+#tweetsNav {
+  border-bottom: 1px solid white;
+}
+
+.navElement {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 18px;
+  font-family: "Segoe UI Semibold", serif;
+}
+
+.anchor {
+  display: block;
+  height: 100%;
+  color: white;
+  text-decoration: none;
+  width: 100%;
+}

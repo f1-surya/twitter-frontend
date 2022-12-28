@@ -1,0 +1,24 @@
+.username {
+    padding: 10px;
+}
+
+.body {
+    white-space: pre-line;
+    padding: 10px 60px 10px 50px;
+    justify-content: space-between;
+}
+
+.likes {
+    padding: 5px;
+}
+
+.tweet {
+    border: 1px solid white;
+    border-radius: 5px;
+    text-align: left;
+    padding: 2px;
+}
+
+.border {
+    padding: 5px;
+}
