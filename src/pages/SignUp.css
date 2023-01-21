@@ -39,6 +39,17 @@
   border-bottom: 1px solid white;
 }
 
+#email {
+  height: 30px;
+  background: inherit;
+  color: white;
+  font-size: 20px;
+  border: none;
+  width: 25%;
+  border-bottom: 1px solid white;
+  padding: 10px;
+}
+
 #button {
   height: 45px;
   width: 15%;

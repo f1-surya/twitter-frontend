@@ -2,20 +2,11 @@
   position: fixed;
   text-align: center;
   top: 0;
+  z-index: 10;
   overflow-x: hidden;
   width: 20%;
   background: #353a42;
   height: 100%;
-}
-
-.logoButton {
-  display: inline-block;
-}
-
-#leftNavBar a {
-  text-decoration: none;
-  display: block;
-  padding: 10px;
 }
 
 .routes {
@@ -23,15 +14,32 @@
 }
 
 .navBox {
+  display: flex;
+  flex-direction: column;
   padding-bottom: 50px;
   padding-top: 20px;
 }
 
 .navDestiny {
+  display: flex;
+  justify-content: center;
   color: white;
+  text-decoration: none;
+  padding: 15px;
 }
 
 .navDestiny:hover {
+  color: royalblue;
+}
+
+.logout {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  padding: 15px;
+}
+
+.logout:hover {
   color: royalblue;
 }
 
@@ -48,16 +56,16 @@
 }
 
 #formPopup {
-  left: 35%;
-  top: 10px;
   display: none;
+  left: 25%;
+  top: 0;
+  top: 100px;
   position: fixed;
   border: 1px solid gray;
-  color: red;
-  z-index: 9;
-  width: 400px;
-  height: 200px;
-  background: black;
+  width: 40%;
+  height: 300px;
+  background: #26292d;
+  border-radius: 10px;
 }
 
 #tweetForm {
@@ -67,11 +75,16 @@
 }
 
 #tweetBox {
-  width: 90%;
-  min-height: 75px;
+  width: 80%;
   background: inherit;
   padding: 10px;
   color: white;
+  font-size: 22px;
+  border: 0;
+}
+
+#tweetBox:focus {
+  outline: 0;
 }
 
 #post {
@@ -83,8 +96,23 @@
   border-radius: 10px;
   bottom: 20px;
   position: absolute;
+  cursor: pointer;
+  border: none;
 }
 
 ::placeholder {
   color: white;
+}
+
+#buttonClose {
+  background: #26292d;
+  left: 10px;
+  color: white;
+  border-radius: 10px;
+  width: 75px;
+  height: 30px;
+  position: absolute;
+  bottom: 20px;
+  cursor: pointer;
+  border: none;
 }

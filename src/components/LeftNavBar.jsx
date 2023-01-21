@@ -1,8 +1,8 @@
-import "./LeftNavBar.css";
-import {AiFillBell} from "react-icons/ai";
-import {CgHome, CgProfile} from "react-icons/cg";
-import logo from "../logo.svg";
 import axios from "axios";
+import { CgHome, CgLogOut, CgProfile } from "react-icons/cg";
+import { useNavigate } from "react-router-dom";
+import logo from "../logo.svg";
+import "./LeftNavBar.css";
 
 function openTweetForm() {
   document.getElementById("formPopup").style.display = "block";
@@ -17,39 +17,66 @@ function enablePost() {
 }
 
 export default function LeftNavBar() {
+  const navigate = useNavigate();
 
   function post() {
     const tweet = document.getElementById("tweetBox").value;
-    axios.post("http://localhost:8000/tweet", {tweet: tweet}).then()
+
+    const config = {
+      method: "post",
+      url: "http://0.0.0.0",
+      data: { tweet: tweet },
+      headers: { Authorization: "Token " + sessionStorage.token }
+    }
+    axios(config).then(response => console.log(response)).catch(error => console.log(error));
+  }
+
+  function logout() {
+    const config = {
+      method: "post",
+      url: "http://0.0.0.0/logout",
+      headers: {
+        Authorization: "Token " + sessionStorage.token
+      }
+    };
+
+    axios(config)
+      .then((response) => {
+        sessionStorage.clear("token");
+        navigate("/login")
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (
-      <header className={"layout"} id={"leftNavBar"}>
-        <img src={logo} alt={"Logo"}/>
-        <div className={"navBox"}>
-          <a className={"navDestiny"} href={"/"}>
-            <div className={"logoButton"}><CgHome size={"25px"}/></div>
-            <div className={"logoButton"}><b className={"routes"}>Home</b></div>
-          </a>
-          <a className={"navDestiny"} href={"/"}>
-            <div className={"logoButton"}><AiFillBell size={"25px"} className={"bell"}/></div>
-            <div className={"logoButton"}><b className={"routes"}>Notifications</b></div>
-          </a>
-          <a className={"navDestiny"} href={"/profile"}>
-            <div className={"logoButton"}><CgProfile size={"25px"}/></div>
-            <div className={"logoButton"}><b className={"routes"}>Profile</b></div>
-          </a>
+    <header className={"layout"} id={"leftNavBar"}>
+      <img src={logo} alt={"Logo"} />
+      <div className={"navBox"}>
+        <a className={"navDestiny"} href={"/"}>
+          <CgHome size={"22px"} />
+          <b className={"routes"}>Home</b>
+        </a>
+        <a className={"navDestiny"} href={"/profile"}>
+          <CgProfile size={"23px"} />
+          <b className={"routes"}>Profile</b>
+        </a>
+        <div className={"logout"} onClick={logout}>
+          <CgLogOut size={"23px"} />
+          <b className={"routes"}>LogOut</b>
         </div>
-        <button id={"tweetButton"} type={"button"} onClick={openTweetForm}>Tweet</button>
-        <div id={"formPopup"}>
-          <form id={"tweetForm"}>
-            <input id={"tweetBox"} type={"text"} placeholder={"What's happening?"} name={"Tweet"} required={true}/><br/>
-            <button type={"submit"} id={"post"} onKeyUp={enablePost} onClick={post}>Post</button>
-            <br/>
-            <button type={"button"} id={"buttonClose"} onClick={closeTweetForm}>Close</button>
-            <br/>
-          </form>
-        </div>
-      </header>
+      </div>
+      <button id={"tweetButton"} type={"button"} onClick={openTweetForm}>Tweet</button>
+      <div id={"formPopup"}>
+        <form id={"tweetForm"}>
+          <textarea id={"tweetBox"} type={"text"} placeholder={"What's happening?"} name={"Tweet"} required={true} /><br />
+          <button type={"button"} id={"post"} onKeyUp={enablePost} onClick={post}>Post</button>
+          <br />
+          <button type={"button"} id={"buttonClose"} onClick={closeTweetForm}>Close</button>
+          <br />
+        </form>
+      </div>
+    </header>
   )
 }
