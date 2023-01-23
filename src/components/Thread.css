@@ -1,0 +1,19 @@
+.wrapper {
+  width: 50%;
+  position: relative;
+  padding-top: 10px;
+  left: 20%;
+  background: inherit
+}
+
+.actions {
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.actionsContent {
+  display: flex;
+  padding: 15px;
+}

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Tweet from "../components/Tweet";
+import Content from "../components/Content.jsx";
 import "./Home.css"
 
 export default function Home() {
@@ -21,6 +21,7 @@ export default function Home() {
     headers: { "Authorization": "Token " + sessionStorage.token }
   };
 
+
   if (state.firstTime) {
     axios(config)
       .then((response) => {
@@ -32,7 +33,7 @@ export default function Home() {
   return (
     <main>
       <div>
-        {state.tweets.map((tweet, index) => (<Tweet key={index} tweet={tweet} />))}
+        {state.tweets.map((tweet, i) => (<Content data={tweet} key={i} />))}
       </div>
     </main>
   );

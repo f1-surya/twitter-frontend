@@ -1,0 +1,32 @@
+.username {
+  padding: 15px;
+  font-size: 19px;
+}
+
+.body {
+  white-space: pre-line;
+  padding: 20px 60px 20px 50px;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.likes {
+  padding: 15px;
+  display: flex;
+}
+
+.comments {
+  padding: 15px;
+  display: flex;
+}
+
+#actions {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.content {
+  border-bottom: 1px solid gray;
+  text-align: left;
+  padding: 2px;
+}
