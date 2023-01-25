@@ -2,52 +2,34 @@
   background-color: #282c34;
   color: white;
   text-align: center;
-  padding: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 #title {
-  padding: 10px;
+  padding: 5px;
   font-size: 30px;
   font-family: "Segoe UI Semibold", serif;
 }
 
 .container {
-  display: flex;
-  justify-content: space-around;
-  padding-top: 40px;
-  padding-bottom: 46px;
+  padding: 39px;
 }
 
-#userName {
+.input {
   height: 30px;
   background: inherit;
   color: white;
   font-size: 20px;
   border: none;
-  width: 25%;
+  width: 30%;
   border-bottom: 1px solid white;
 }
 
-.password {
-  height: 30px;
-  background: inherit;
-  color: white;
-  font-size: 20px;
-  border: none;
-  width: 25%;
-  padding: 10px;
-  border-bottom: 1px solid white;
-}
-
-#email {
-  height: 30px;
-  background: inherit;
-  color: white;
-  font-size: 20px;
-  border: none;
-  width: 25%;
-  border-bottom: 1px solid white;
-  padding: 10px;
+.input:focus {
+  outline: none;
 }
 
 #button {
@@ -61,7 +43,7 @@
 }
 
 #createAccount {
-  padding: 10px;
+  padding: 5px;
 }
 
 #signUp {
@@ -70,5 +52,5 @@
 }
 
 #logo {
-  padding: 10px;
+  padding: 5px;
 }

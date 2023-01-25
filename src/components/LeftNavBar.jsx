@@ -4,31 +4,40 @@ import { useNavigate } from "react-router-dom";
 import logo from "../logo.svg";
 import "./LeftNavBar.css";
 
-function openTweetForm() {
-  document.getElementById("formPopup").style.display = "block";
-}
-
-function closeTweetForm() {
-  document.getElementById("formPopup").style.display = "none";
-}
-
-function enablePost() {
-  document.getElementById("post").disabled = document.getElementById("tweet").value === "";
-}
-
 export default function LeftNavBar() {
   const navigate = useNavigate();
+
+  function openTweetForm() {
+    document.getElementById("formPopup").style.display = "block";
+  }
+
+  function closeTweetForm() {
+    document.getElementById("formPopup").style.display = "none";
+  }
 
   function post() {
     const tweet = document.getElementById("tweetBox").value;
 
-    const config = {
-      method: "post",
-      url: "http://0.0.0.0",
-      data: { tweet: tweet },
-      headers: { Authorization: "Token " + sessionStorage.token }
+    if (tweet.length > 0) {
+      const data = new FormData();
+      data.append("body", tweet)
+
+      const config = {
+        method: "post",
+        url: "http://0.0.0.0",
+        data: data,
+        headers: { Authorization: "Token " + sessionStorage.token }
+      }
+      axios(config).then((response) => {
+        console.log(response);
+        document.getElementById("tweetBox").value = ""
+        closeTweetForm();
+      })
+        .catch(error => console.log(error));
     }
-    axios(config).then(response => console.log(response)).catch(error => console.log(error));
+    else {
+      alert("Tweet body shoudn't be empty")
+    }
   }
 
   function logout() {
@@ -69,13 +78,13 @@ export default function LeftNavBar() {
       </div>
       <button id={"tweetButton"} type={"button"} onClick={openTweetForm}>Tweet</button>
       <div id={"formPopup"}>
-        <form id={"tweetForm"}>
-          <textarea id={"tweetBox"} type={"text"} placeholder={"What's happening?"} name={"Tweet"} required={true} /><br />
-          <button type={"button"} id={"post"} onKeyUp={enablePost} onClick={post}>Post</button>
-          <br />
-          <button type={"button"} id={"buttonClose"} onClick={closeTweetForm}>Close</button>
-          <br />
-        </form>
+        <textarea id={"tweetBox"} type={"text"}
+          placeholder={"What's happening?"} name={"Tweet"} />
+        <br />
+        <button id={"post"} type={"button"} onClick={post}>Post</button>
+        <br />
+        <button id={"buttonClose"} type={"button"} onClick={closeTweetForm}>Close</button>
+        <br />
       </div>
     </header>
   )

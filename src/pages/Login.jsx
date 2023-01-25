@@ -1,19 +1,19 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../logo.svg";
 import "./Login.css";
 
-function enableLogin() {
-  document.getElementById("button").disabled =
-    document.getElementById("userName").value === ""
-    && document.getElementById("password").value === "";
-}
-
 export default function Login() {
   let navigate = useNavigate();
+  const [credentials, setCredentials] = useState(true);
 
-  const login = () => {
+  function handleLoginCredentials(e) {
+    setCredentials(!(!(!document.getElementById("userName").value)
+      && !(!document.getElementById("password").value)));
+  }
+
+  function login() {
     const userName = document.getElementById("userName").value;
     const password = document.getElementById("password").value;
 
@@ -46,21 +46,28 @@ export default function Login() {
         Login to Twitter
       </div>
       <div>Please enter your Username and Password</div>
-      <form id={"loginForm"}>
-        <div className={"container"}>
-          <input id={"userName"} type={"text"} placeholder={"Username"} required={true} />
+      <div id={"input"}>
+        <div id={"container"}>
+          <input className={"loginCredentials"} id={"userName"}
+            type={"text"} placeholder={"Username"}
+            onChange={handleLoginCredentials} />
         </div>
-        <div className={"container"}>
-          <input id={"password"} type={"text"} placeholder={"Password"} required={true} />
+        <div id={"container"}>
+          <input className={"loginCredentials"} id={"password"}
+            type={"password"} placeholder={"Password"}
+            onChange={handleLoginCredentials} />
         </div>
-        <div className={"container"}>
-          <button id={"button"} onKeyUp={enableLogin} type={"button"} onClick={login}>Login</button>
+        <div id={"container"}>
+          <button id={"button"} type={"submit"}
+            onClick={login} disabled={credentials}>
+            Login
+          </button>
         </div>
-      </form>
+      </div>
       <div id={"createAccount"}>
         Don't have an account?
         <a id={"signUp"} href={"signUp"}> Sign up</a>
       </div>
     </div>
-  )
+  );
 }

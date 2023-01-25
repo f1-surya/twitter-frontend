@@ -2,21 +2,23 @@ import { useEffect } from "react";
 import logo from "../logo.svg";
 import "./SignUp.css"
 import axios from "axios";
-
-function enableLogin() {
-  document.getElementById("button").disabled =
-    document.getElementById("userName").value === ""
-    && document.getElementById("password").value === "";
-}
+import { useState } from "react";
 
 export default function SignUp() {
   useEffect(() => {
     document.title = "SignUp to Twitter"
   })
 
+  const [credentials, setCredentials] = useState(true);
+
+  function handleCredentials(e) {
+    setCredentials(!(!(!document.getElementById("username").value) && !(!document.getElementById("mail").value)
+      && !(!document.getElementById("password1").value) && !(!document.getElementById("password2").value)));
+  }
+
   async function signUp() {
-    const username = document.getElementById("userName").value;
-    const mail = document.getElementById("email").value;
+    const username = document.getElementById("username").value;
+    const mail = document.getElementById("mail").value;
     const password1 = document.getElementById("password1").value;
     const password2 = document.getElementById("password2").value;
     const data = new FormData();
@@ -26,7 +28,7 @@ export default function SignUp() {
       data.append("email", mail);
       data.append("password", password1);
 
-      await axios.post("http://127.0.0.1:8000/register", data).then((res) => {
+      await axios.post("http://0.0.0.0/register", data).then((res) => {
         console.log(res.status);
         console.log(res.data);
       })
@@ -35,28 +37,38 @@ export default function SignUp() {
 
   return (
     <div className={"signUp"}>
-      <img id={"logo"} src={logo} alt={"logo"} />
+      <div>
+        <img id={"logo"} src={logo} alt={"logo"} />
+      </div>
       <div id={"title"}>
         SignUp to Twitter
       </div>
-      <form id={"signUpForm"}>
-        <div className={"container"}>
-          <input id={"userName"} type={"text"} placeholder={"Username"} required={true} />
-        </div>
-        <div className={"container"}>
-          <input id={"email"} type={"text"} placeholder={"Enter eMail"} required={true} />
-        </div>
-        <div className={"container"}>
-          <input className={"password"} id={"password1"} type={"text"} placeholder={"Password"} required={true} />
-        </div>
-        <div className={"container"}>
-          <input className={"password"} id={"password2"} type={"text"} placeholder={"Enter Password again"}
-            required={true} />
-        </div>
-        <div className={"container"}>
-          <button id={"button"} onKeyUp={enableLogin} type={"button"} onClick={signUp}>SignUp</button>
-        </div>
-      </form>
+      <div className={"container"}>
+        <input className={"input"} id={"username"}
+          type={"text"} onChange={handleCredentials}
+          placeholder={"Username"} />
+      </div>
+      <div className={"container"}>
+        <input className={"input"} id={"mail"}
+          type={"text"} onChange={handleCredentials}
+          placeholder={"Enter eMail"} />
+      </div>
+      <div className={"container"}>
+        <input className={"input"} id={"password1"}
+          type={"password"} onChange={handleCredentials}
+          placeholder={"Password"} />
+      </div>
+      <div className={"container"}>
+        <input className={"input"} id={"password2"}
+          type={"password"} onChange={handleCredentials}
+          placeholder={"Enter Password again"} />
+      </div>
+      <div className={"container"}>
+        <button id={"button"} disabled={credentials}
+          type={"button"} onClick={signUp}>
+          SignUp
+        </button>
+      </div>
     </div>
-  )
+  );
 }

@@ -17,3 +17,38 @@
   display: flex;
   padding: 15px;
 }
+
+.createComment {
+  padding: 10px;
+  min-height: 50px;
+  height: fit-content;
+  display: flex;
+  justify-content: space-evenly;
+  overflow: hidden;
+}
+
+#newComment {
+  resize: none;
+  color: white;
+  width: 80%;
+  height: 15px;
+  font-size: large;
+  text-align: left;
+  background-color: inherit;
+  border: none;
+  border-bottom: 1px solid gray;
+}
+
+#newComment:focus {
+  outline: none;
+}
+
+#replyButton {
+  background-color: #1DA1F2;
+  border-radius: 20px;
+  width: 15%;
+  height: 45px;
+  border: none;
+  color: white;
+  font-size: large;
+}
