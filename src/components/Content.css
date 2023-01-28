@@ -1,6 +1,16 @@
+.top {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
 .username {
-  padding: 15px;
+  padding-left: 5px;
   font-size: 19px;
+}
+
+.contentAge {
+  padding-left: 5px;
 }
 
 .body {

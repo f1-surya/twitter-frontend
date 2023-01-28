@@ -58,7 +58,10 @@ export default function Content(props) {
 
   return (
     <div className={"content"}>
-      <b className={"username"}>{props.data.author}</b>
+      <div className={"top"}>
+        <b className={"username"}>{props.data.author}</b>
+        <div className={"contentAge"}>Posted {props.data.age}</div>
+      </div>
       <div className={"body"} onClick={redirect}>{props.data.body}</div>
       <div id={"actions"}>
         <div className={"likes"} onClick={like}>

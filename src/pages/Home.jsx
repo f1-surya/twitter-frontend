@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Content from "../components/Content.jsx";
+import { compare, contentAge } from "../Utils.js";
 import "./Home.css"
 
 export default function Home() {
@@ -13,7 +14,7 @@ export default function Home() {
     }
   }, [navigate]
   )
-  const [state, setState] = useState({firstTime: true, tweets: []});
+  const [state, setState] = useState({ firstTime: true, tweets: [] });
 
   const config = {
     method: "get",
@@ -25,7 +26,9 @@ export default function Home() {
   if (state.firstTime) {
     axios(config)
       .then((response) => {
-        setState({firstTime: false, tweets: response.data})
+        const tweets = response.data.sort(compare);
+        tweets.forEach(contentAge)
+        setState({ firstTime: false, tweets: tweets });
       })
       .catch(error => console.log(error));
   }
@@ -33,7 +36,7 @@ export default function Home() {
   return (
     <main>
       <div>
-        {state.tweets.map((tweet, i) => (<Content data={tweet} key={i} />))}
+        {state.tweets.map((tweet, i) => (<Content data={tweet} key={i} tweet={true} />))}
       </div>
     </main>
   );

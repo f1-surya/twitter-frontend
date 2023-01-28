@@ -4,6 +4,7 @@ import { RiHeartLine, RiHeartFill, RiMessageLine } from 'react-icons/ri';
 import { useLocation } from 'react-router-dom';
 import "./Thread.css";
 import Content from './Content.jsx';
+import { compare, contentAge } from '../Utils';
 
 export default function Thread() {
   const location = useLocation();
@@ -21,7 +22,9 @@ export default function Thread() {
 
     axios(config)
       .then((response) => {
-        setState({ firstTime: false, comments: response.data })
+        const comments = response.data.sort(compare)
+        comments.forEach(contentAge)
+        setState({ firstTime: false, comments: comments })
       })
       .catch(error => console.log(error));
    }
