@@ -2,18 +2,18 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Content from "../components/Content.jsx";
-import { compare, contentAge } from "../Utils.js";
-import "./Home.css"
+import { contentAge } from "../Utils.js";
+import "./Home.css";
 
 export default function Home() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (sessionStorage.token === undefined) {
       navigate("/login")
     }
   }, [navigate]
-  )
+  );
   const [state, setState] = useState({ firstTime: true, tweets: [] });
 
   const config = {
@@ -26,9 +26,8 @@ export default function Home() {
   if (state.firstTime) {
     axios(config)
       .then((response) => {
-        const tweets = response.data.sort(compare);
-        tweets.forEach(contentAge)
-        setState({ firstTime: false, tweets: tweets });
+        response.data.forEach(contentAge);
+        setState({ firstTime: false, tweets: response.data });
       })
       .catch(error => console.log(error));
   }

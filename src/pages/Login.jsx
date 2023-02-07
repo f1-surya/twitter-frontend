@@ -16,15 +16,15 @@ export default function Login() {
   function login() {
     const userName = document.getElementById("userName").value;
     const password = document.getElementById("password").value;
-
-    const data = new FormData();
-    data.append('username', userName);
-    data.append('password', password);
+    sessionStorage.username = userName;
 
     const config = {
       method: "post",
       url: "http://0.0.0.0/login",
-      data: data
+      data: {
+        username: userName,
+        password: password
+      }
     };
 
     if (sessionStorage.token === undefined) {
@@ -58,7 +58,7 @@ export default function Login() {
             onChange={handleLoginCredentials} />
         </div>
         <div id={"container"}>
-          <button id={"button"} type={"submit"}
+          <button className={"button"} type={"submit"}
             onClick={login} disabled={credentials}>
             Login
           </button>
@@ -66,7 +66,7 @@ export default function Login() {
       </div>
       <div id={"createAccount"}>
         Don't have an account?
-        <a id={"signUp"} href={"signUp"}> Sign up</a>
+        <a id={"signUp"} href={"signUp/names"}> Sign up</a>
       </div>
     </div>
   );

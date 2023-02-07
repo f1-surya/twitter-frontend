@@ -1,31 +1,27 @@
 .top {
   display: flex;
-  flex-direction: column;
   padding: 10px;
+  justify-content: space-between;
 }
 
 .username {
-  padding-left: 5px;
-  font-size: 19px;
+  padding: 5px;
+  font-size: 16px;
 }
 
 .contentAge {
-  padding-left: 5px;
+  padding: 10px;
+  font-size: 13px;
 }
 
 .body {
   white-space: pre-line;
-  padding: 20px 60px 20px 50px;
+  padding: 10px 60px 10px 60px;
   justify-content: space-between;
   cursor: pointer;
 }
 
-.likes {
-  padding: 15px;
-  display: flex;
-}
-
-.comments {
+.actionElements {
   padding: 15px;
   display: flex;
 }

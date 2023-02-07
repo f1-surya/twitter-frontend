@@ -9,7 +9,7 @@ export default function Content(props) {
     likedByUser: props.data.liked_by_user,
     likesCount: props.data.likes_count
   });
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function like() {
     let config = {};
@@ -53,27 +53,28 @@ export default function Content(props) {
   }
 
   function redirect() {
-    navigate("tweet", { state: props })
+    navigate("tweet", { state: props });
   }
 
   return (
     <div className={"content"}>
       <div className={"top"}>
-        <b className={"username"}>{props.data.author}</b>
+        <div>
+          <div>{props.data.author_name}</div>
+          <b className={"username"}>@{props.data.author}</b>
+        </div>
         <div className={"contentAge"}>Posted {props.data.age}</div>
       </div>
       <div className={"body"} onClick={redirect}>{props.data.body}</div>
       <div id={"actions"}>
-        <div className={"likes"} onClick={like}>
+        <div className={"actionElements"} onClick={like}>
           {state.likedByUser ? <RiHeartFill size={"20px"} color={"red"} />
             : <RiHeartLine size={"20px"} color={"gray"} />}
           <div>{state.likesCount}</div>
         </div>
-        <div>
-          <div className={"comments"}>
-            <RiMessageLine size={"20px"} color={"gray"} />
-            <div>{props.data.comment_count}</div>
-          </div>
+        <div className={"actionElements"}>
+          <RiMessageLine size={"20px"} color={"gray"} />
+          <div>{props.data.comment_count}</div>
         </div>
       </div>
     </div>

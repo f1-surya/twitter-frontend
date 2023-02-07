@@ -1,57 +1,115 @@
-import { useEffect } from "react";
-import logo from "../logo.svg";
-import "./SignUp.css"
 import axios from "axios";
-import { useState } from "react";
+import React, { useEffect, useState } from 'react';
+import { AiOutlineArrowRight } from "react-icons/ai";
+import { Outlet, useNavigate } from "react-router-dom";
+import logo from "../logo.svg";
+import "./SignUp.css";
 
-export default function SignUp() {
-  useEffect(() => {
-    document.title = "SignUp to Twitter"
-  })
+export function Username() {
 
   const [credentials, setCredentials] = useState(true);
 
-  function handleCredentials(e) {
-    setCredentials(!(!(!document.getElementById("username").value) && !(!document.getElementById("mail").value)
-      && !(!document.getElementById("password1").value) && !(!document.getElementById("password2").value)));
+  function handleCredentials() {
+    setCredentials(!(!(!document.getElementById("firstName").value) && !(!document.getElementById("lastName").value)
+      && !(!document.getElementById("mail").value)));
   }
 
-  async function signUp() {
-    const username = document.getElementById("username").value;
-    const mail = document.getElementById("mail").value;
+  const navigate = useNavigate();
+
+  function click() {
+    sessionStorage.firstName = document.getElementById("firstName").value;
+    sessionStorage.lastName = document.getElementById("lastName").value;
+    sessionStorage.mail = document.getElementById("mail").value;
+    navigate("/signUp/password");
+  }
+
+  return (
+    <div>
+      Step 1
+      <div className={"container"}>
+        <input className={"input"} id={"firstName"}
+          type={"text"} placeholder={"First name"}
+          onChange={handleCredentials} />
+      </div>
+      <div className={"container"}>
+        <input className={"input"} id={"lastName"}
+          type={"text"} placeholder={"Last name"}
+          onChange={handleCredentials} />
+      </div>
+      <div className={"container"}>
+        <input className={"input"} id={"mail"}
+          type={"text"} placeholder={"Enter eMail"}
+          onChange={handleCredentials} />
+      </div>
+      <button className={"signUpButton"} id={"button"}
+        disabled={credentials} onClick={click}>
+        <AiOutlineArrowRight size={"25px"} />
+      </button>
+    </div>
+  );
+}
+
+export function Password() {
+  const [credentials, setCredentials] = useState(true);
+
+  function handleCredentials() {
+    setCredentials(!(!(!document.getElementById("username").value) && !(!document.getElementById("password1").value)
+      && !(!document.getElementById("password2").value)));
+  }
+
+  const navigate = useNavigate();
+
+  function signUp() {
     const password1 = document.getElementById("password1").value;
     const password2 = document.getElementById("password2").value;
-    const data = new FormData();
 
     if (password1 === password2) {
-      data.append("username", username);
-      data.append("email", mail);
-      data.append("password", password1);
-
-      await axios.post("http://0.0.0.0/register", data).then((res) => {
-        console.log(res.status);
-        console.log(res.data);
-      })
+      const username = document.getElementById("username").value;
+      const config = {
+        method: "post",
+        url: "http://0.0.0.0/register",
+        data: {
+          first_name: sessionStorage.firstName,
+          last_name: sessionStorage.lastName,
+          email: sessionStorage.mail,
+          username: username,
+          password: password1
+        }
+      };
+      axios(config).then(
+        (response) => {
+          const login = {
+            method: "post",
+            url: "http://0.0.0.0/login",
+            data: {
+              username: username,
+              password: password1
+            }
+          };
+          axios(login)
+            .then((response) => {
+              sessionStorage.clear()
+              sessionStorage.token = response.data["token"];
+              navigate('/');
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      ).catch((error) => console.log(error));
+    }
+    else {
+      alert("Passwords don't match")
     }
   }
 
   return (
-    <div className={"signUp"}>
-      <div>
-        <img id={"logo"} src={logo} alt={"logo"} />
-      </div>
-      <div id={"title"}>
-        SignUp to Twitter
-      </div>
+    <div>
+      Step 2
       <div className={"container"}>
         <input className={"input"} id={"username"}
           type={"text"} onChange={handleCredentials}
           placeholder={"Username"} />
-      </div>
-      <div className={"container"}>
-        <input className={"input"} id={"mail"}
-          type={"text"} onChange={handleCredentials}
-          placeholder={"Enter eMail"} />
       </div>
       <div className={"container"}>
         <input className={"input"} id={"password1"}
@@ -64,10 +122,31 @@ export default function SignUp() {
           placeholder={"Enter Password again"} />
       </div>
       <div className={"container"}>
-        <button id={"button"} disabled={credentials}
+        <button className={"signUpButton"} disabled={credentials}
           type={"button"} onClick={signUp}>
           SignUp
         </button>
+      </div>
+    </div>
+  )
+}
+
+
+export function SignUp() {
+  useEffect(() => {
+    document.title = "SignUp to Twitter"
+  });
+
+  return (
+    <div className={"signUp"}>
+      <div id={"border"}>
+        <div>
+          <img id={"logo"} src={logo} alt={"logo"} />
+        </div>
+        <div id={"title"}>
+          SignUp to Twitter
+        </div>
+        <Outlet />
       </div>
     </div>
   );

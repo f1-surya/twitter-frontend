@@ -6,7 +6,7 @@ import Layout from "./Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import SignUp from "./pages/SignUp";
+import { SignUp, Username, Password } from "./pages/SignUp";
 
 export default function App() {
 
@@ -20,7 +20,10 @@ export default function App() {
           <Route path={"tweet"} element={<Thread />} />
         </Route>
         <Route path={"/login"} element={<Login />} />
-        <Route path={"/signUp"} element={<SignUp />} />
+        <Route path={"/signUp"} element={<SignUp />}>
+          <Route path={"names"} element={<Username />} />
+          <Route path={"password"} element={<Password />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

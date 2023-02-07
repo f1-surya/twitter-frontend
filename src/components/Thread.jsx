@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { RiHeartLine, RiHeartFill, RiMessageLine } from 'react-icons/ri';
+import { RiHeartFill, RiHeartLine, RiMessageLine } from 'react-icons/ri';
 import { useLocation } from 'react-router-dom';
-import "./Thread.css";
+import { contentAge } from '../Utils';
 import Content from './Content.jsx';
-import { compare, contentAge } from '../Utils';
+import "./Thread.css";
 
 export default function Thread() {
   const location = useLocation();
@@ -22,9 +22,8 @@ export default function Thread() {
 
     axios(config)
       .then((response) => {
-        const comments = response.data.sort(compare)
-        comments.forEach(contentAge)
-        setState({ firstTime: false, comments: comments })
+        response.data.forEach(contentAge)
+        setState({ firstTime: false, comments: response.data })
       })
       .catch(error => console.log(error));
    }
@@ -68,7 +67,8 @@ export default function Thread() {
   return (
     <div className={"wrapper"}>
       <div id={"selectedTweet"}>
-        <b className={"username"}>{tweet.author}</b>
+        <div style={{paddingLeft: "10px"}}>{tweet.author_name}</div>
+        <b style={{paddingLeft: "12px"}}>@{tweet.author}</b>
         <div className={"body"}>{tweet.body}</div>
         <div className={"actions"}>
           <div className={"actionsContent"}>

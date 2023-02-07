@@ -2,10 +2,9 @@
   background-color: #282c34;
   color: white;
   text-align: center;
-  padding: 10px;
+  padding: 80px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 #title {
@@ -18,13 +17,20 @@
   padding: 39px;
 }
 
+#border {
+  padding: 20px;
+  border: 1px solid gray;
+  border-radius: 15px;
+  width: 45%;
+}
+
 .input {
   height: 30px;
   background: inherit;
   color: white;
   font-size: 20px;
   border: none;
-  width: 30%;
+  width: 65%;
   border-bottom: 1px solid white;
 }
 
@@ -32,10 +38,10 @@
   outline: none;
 }
 
-#button {
+.signUpButton {
   height: 45px;
   width: 15%;
-  font-size: 20px;
+  font-size: medium;
   background: #1DA1F2;
   color: white;
   border-radius: 10px;

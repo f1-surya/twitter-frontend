@@ -1,15 +1,3 @@
-export function compare(a, b) {
-  const date1 = new Date(a.posted_date);
-  const date2 = new Date(b.posted_date);
-  if (date1.getTime() > date2.getTime()) {
-    return -1;
-  }
-  if (date1.getTime() < date2.getTime()) {
-    return 1;
-  }
-  return 0;
-}
-
 export function contentAge(content) {
   const postedDate = new Date(content.posted_date);
   const now = Date.now();
