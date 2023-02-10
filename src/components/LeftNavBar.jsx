@@ -41,7 +41,7 @@ export default function LeftNavBar() {
   }
 
   function profile() {
-    navigate("profile", { self: true });
+    navigate("profile", { state: {self: true} });
   }
 
   function logout() {

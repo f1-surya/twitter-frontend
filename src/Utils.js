@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export function contentAge(content) {
   const postedDate = new Date(content.posted_date);
   const now = Date.now();
@@ -25,4 +27,21 @@ export function contentAge(content) {
   else if (diffMonths >= 1) {
     content["age"] = diffMonths + "monts ago";
   }
+}
+
+export function fetchData(url, setState) {
+  const config = {
+    url: url,
+    method: "get",
+    headers: { "Authorization": "Token " + sessionStorage.token },
+  };
+  axios(config)
+    .then((response) => {
+      response.data.tweets.forEach(contentAge)
+      setState({
+        firstTime: false,
+        profile: response.data.profile,
+        content: response.data.tweets
+      });
+    });
 }
