@@ -8,12 +8,13 @@ import "./Profile.css";
 export default function Profile() {
   const location = useLocation();
   const [state, setState] = useState({ firstTime: true, profile: {}, content: [] });
+  const self = location.state.self || location.state.username === sessionStorage.username;
 
   useEffect(() => {
     if (state.firstTime) {
       const button = document.getElementById("multiButton");
-      if (location.state.self || location.state.username === sessionStorage.username) {
-        const url = `http://0.0.0.0/profile/${sessionStorage.username}/tweets`;
+      if (self) {
+        const url = `http://0.0.0.0/profile/tweets/${sessionStorage.username}`;
         fetchData(url, setState);
         button.innerHTML = "Edit";
         button.style.backgroundColor = "inherit";
@@ -21,11 +22,11 @@ export default function Profile() {
         button.style.color = "white";
       }
       else {
-        const url = `http://0.0.0.0/profile/${location.state.username}/tweets`;
+        const url = `http://0.0.0.0/profile/tweets/${location.state.username}`;
         fetchData(url, setState);
       }
     }
-  }, [location, state]
+  }, [self, location, state]
   );
 
   function action() {
@@ -44,7 +45,7 @@ export default function Profile() {
         }
       };
       axios(config).then((response) => {
-        const url = `http://0.0.0.0/profile/${location.state.username}/tweets`;
+        const url = `http://0.0.0.0/profile/tweets/${location.state.username}`;
         fetchData(url, setState);
       })
     }
@@ -58,27 +59,27 @@ export default function Profile() {
 
   return (
     <main>
-      <div className={"user"}>
-        <div className={"names"}>
-          <b className={"fullName"}>{state.profile.full_name}</b>
+      <div className="user">
+        <div className="names">
+          <b className="fullName">{state.profile.full_name}</b>
           <div>
             @{state.profile.user}
           </div>
         </div>
-        <div className={"about"}>{state.profile.about}</div>
-        <div className={"follows"}>
-          <div className={"following"}>
-            <div className={"numbers"}>{state.profile.following_count}</div>
+        <div className="about">{state.profile.about}</div>
+        <div className="follows">
+          <div className="following">
+            <div className="numbers">{state.profile.following_count}</div>
             Following
           </div>
-          <div className={"followers"}>
-            <div className={"numbers"}>{state.profile.followers_count}</div>
+          <div className="followers">
+            <div className="numbers">{state.profile.followers_count}</div>
             Followers
           </div>
         </div>
-        <button className={"Button"} id={"multiButton"} type={"button"} onClick={action}
+        <button className="Button" id="multiButton" type="button" onClick={action}
           style={state.profile.followed_by_user ? style : {}}>
-          {state.profile.followed_by_user ? "Unfollow" : "Follow"}
+          {self ? "Edit" : state.profile.followed_by_user ? "Unfollow" : "Follow"}
         </button>
       </div>
       {state.content.map((content, i) => <Content data={content} key={i} />)}

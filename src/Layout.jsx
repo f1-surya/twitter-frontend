@@ -1,15 +1,15 @@
 import LeftNavBar from "./components/LeftNavBar";
 import React from "react";
 import {Outlet} from "react-router-dom";
-import Searchbar from "./components/Searchbar";
+import Explore from "./components/Explore";
 
 export default function Layout() {
 
   return (
-      <div className={"App"}>
-        <LeftNavBar className={"navbar"}/>
+      <div className="App">
+        <LeftNavBar className="navbar"/>
         <Outlet/>
-        <Searchbar/>
+        <Explore/>
       </div>
   )
 }

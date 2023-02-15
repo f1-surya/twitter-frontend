@@ -64,30 +64,30 @@ export default function LeftNavBar() {
   }
 
   return (
-    <header className={"layout"} id={"leftNavBar"}>
-      <img src={logo} alt={"Logo"} />
-      <div className={"navBox"}>
-        <a className={"navDestiny"} href={"/"}>
-          <CgHome size={"22px"} />
-          <b className={"routes"}>Home</b>
+    <header className="layout" id="leftNavBar">
+      <img src={logo} alt="Logo" />
+      <div className="navBox">
+        <a className="navDestiny" href="/">
+          <CgHome size="22px" />
+          <b className="routes">Home</b>
         </a>
-        <div className={"navDestiny"} onClick={profile}>
-          <CgProfile size={"23px"} />
-          <b className={"routes"}>Profile</b>
+        <div className="navDestiny" onClick={profile}>
+          <CgProfile size="23px" />
+          <b className="routes">Profile</b>
         </div>
-        <div className={"navDestiny"} onClick={logout}>
-          <CgLogOut size={"23px"} />
-          <b className={"routes"}>LogOut</b>
+        <div className="navDestiny" onClick={logout}>
+          <CgLogOut size="23px" />
+          <b className="routes">LogOut</b>
         </div>
       </div>
-      <button id={"tweetButton"} type={"button"} onClick={openTweetForm}>Tweet</button>
-      <div id={"formPopup"}>
-        <textarea id={"tweetBox"} type={"text"}
-          placeholder={"What's happening?"} name={"Tweet"} />
+      <button id="tweetButton" type="button" onClick={openTweetForm}>Tweet</button>
+      <div id="formPopup">
+        <textarea id="tweetBox" type="text"
+          placeholder="What's happening?" name="Tweet" />
         <br />
-        <button id={"post"} type={"button"} onClick={post}>Post</button>
+        <button id="post" type="button" onClick={post}>Post</button>
         <br />
-        <button id={"buttonClose"} type={"button"} onClick={closeTweetForm}>Close</button>
+        <button id="buttonClose" type="button" onClick={closeTweetForm}>Close</button>
         <br />
       </div>
     </header>

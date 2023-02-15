@@ -40,33 +40,33 @@ export default function Login() {
   }
 
   return (
-    <div className={"login"}>
-      <img id={"logo"} src={logo} alt={"logo"} />
-      <div id={"title"}>
+    <div className="login">
+      <img id="logo" src={logo} alt="logo" />
+      <div id="title">
         Login to Twitter
       </div>
       <div>Please enter your Username and Password</div>
-      <div id={"input"}>
-        <div id={"container"}>
-          <input className={"loginCredentials"} id={"userName"}
-            type={"text"} placeholder={"Username"}
+      <div id="input">
+        <div id="container">
+          <input className="loginCredentials" id="userName"
+            type="text" placeholder="Username"
             onChange={handleLoginCredentials} />
         </div>
-        <div id={"container"}>
-          <input className={"loginCredentials"} id={"password"}
-            type={"password"} placeholder={"Password"}
+        <div id="container">
+          <input className="loginCredentials" id="password"
+            type="password" placeholder="Password"
             onChange={handleLoginCredentials} />
         </div>
-        <div id={"container"}>
-          <button className={"button"} type={"submit"}
+        <div id="container">
+          <button className="button" type="submit"
             onClick={login} disabled={credentials}>
             Login
           </button>
         </div>
       </div>
-      <div id={"createAccount"}>
+      <div id="createAccount">
         Don't have an account?
-        <a id={"signUp"} href={"signUp/names"}> Sign up</a>
+        <a id="signUp" href="signUp/names"> Sign up</a>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { RiHeartFill, RiHeartLine, RiMessageLine } from 'react-icons/ri';
 import { useLocation } from 'react-router-dom';
-import { contentAge } from '../Utils';
+import getData from '../Utils';
 import Content from './Content.jsx';
 import "./Thread.css";
 
@@ -10,25 +10,10 @@ export default function Thread() {
   const location = useLocation();
   const tweet = location.state.data;
   const [commentCount, setCommentCount] = useState(tweet.comment_count);
-  const [state, setState] = useState({ firstTime: true, comments: [] });
-   function getData() {
-    const config = {
-      method: "get",
-      url: "http://0.0.0.0/comment/" + tweet.id,
-      headers: {
-        Authorization: "Token " + sessionStorage.token
-      }
-    };
-
-    axios(config)
-      .then((response) => {
-        response.data.forEach(contentAge)
-        setState({ firstTime: false, comments: response.data })
-      })
-      .catch(error => console.log(error));
-   }
+  const [state, setState] = useState({ firstTime: true, data: [] });
+  
   if (state.firstTime) {
-    getData();
+    getData(setState, "http://0.0.0.0/comment/" + tweet.id);
   }
 
   const tx = document.getElementsByTagName("textarea");
@@ -48,7 +33,7 @@ export default function Thread() {
       const config = {
         method: "post",
         url: "http://0.0.0.0/comment/" + tweet.id,
-        data: {body: reply},
+        data: { body: reply },
         headers: { Authorization: "Token " + sessionStorage.token }
       }
 
@@ -65,30 +50,30 @@ export default function Thread() {
   }
 
   return (
-    <div className={"wrapper"}>
-      <div id={"selectedTweet"}>
-        <div style={{paddingLeft: "10px"}}>{tweet.author_name}</div>
-        <b style={{paddingLeft: "12px"}}>@{tweet.author}</b>
-        <div className={"body"}>{tweet.body}</div>
-        <div className={"actions"}>
-          <div className={"actionsContent"}>
+    <div className="wrapper">
+      <div id="selectedTweet">
+        <div style={{ paddingLeft: "10px" }}>{tweet.author_name}</div>
+        <b style={{ paddingLeft: "12px" }}>@{tweet.author}</b>
+        <div className="body">{tweet.body}</div>
+        <div className="actions">
+          <div className="actionsContent">
             {tweet.liked_by_user ? <RiHeartFill size={"20px"} color={"red"} /> :
-              <RiHeartLine size={"20px"} color={"gray"} />}
+              <RiHeartLine size="20px" color="gray" />}
             <div>{tweet.likes_count}</div>
           </div>
-          <div className={"actionsContent"}>
-            <RiMessageLine size={"20px"} color={"gray"} />
+          <div className="actionsContent">
+            <RiMessageLine size="20px" color="gray" />
             <div>{commentCount}</div>
           </div>
         </div>
-        <div className={"createComment"}>
-          <textarea id={"newComment"} type="text" placeholder={"Tweet your reply"} defaultValue={""} />
-          <button id={"replyButton"} type={"button"}  onClick={reply}>
+        <div className="createComment">
+          <textarea id="newComment" type="text" placeholder="Tweet your reply" defaultValue="" />
+          <button id="replyButton" type="button" onClick={reply}>
             Reply
           </button>
         </div>
         <div>
-          {state.comments.map((comment, i) => (<Content data={comment} key={i} />))}
+          {state.data.map((comment, i) => (<Content data={comment} key={i} />))}
         </div>
       </div>
     </div>

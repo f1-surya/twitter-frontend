@@ -1,41 +1,30 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Content from "../components/Content.jsx";
-import { contentAge } from "../Utils.js";
+import getData from "../Utils.js";
 import "./Home.css";
 
 export default function Home() {
   const navigate = useNavigate();
+  const [state, setState] = useState({ firstTime: true, data: [] });
 
   useEffect(() => {
     if (sessionStorage.token === undefined) {
       navigate("/login")
     }
-  }, [navigate]
+    else {
+      if (state.firstTime) {
+        getData(setState, `http://0.0.0.0/`)
+      }
+    }
+  }, [navigate, state]
   );
-  const [state, setState] = useState({ firstTime: true, tweets: [] });
 
-  const config = {
-    method: "get",
-    url: "http://0.0.0.0/",
-    headers: { "Authorization": "Token " + sessionStorage.token }
-  };
-
-
-  if (state.firstTime) {
-    axios(config)
-      .then((response) => {
-        response.data.forEach(contentAge);
-        setState({ firstTime: false, tweets: response.data });
-      })
-      .catch(error => console.log(error));
-  }
 
   return (
     <main>
       <div>
-        {state.tweets.map((tweet, i) => (<Content data={tweet} key={i} tweet={true} />))}
+        {state.data.map((tweet, i) => (<Content data={tweet} key={i} tweet={true} />))}
       </div>
     </main>
   );

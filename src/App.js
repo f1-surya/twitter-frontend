@@ -13,16 +13,15 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={"/"} element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path={"profile"} element={<Profile />} />
-          <Route path={"profile/likes"} element={<Profile type={"likes"} />} />
-          <Route path={"tweet"} element={<Thread />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="tweet" element={<Thread />} />
         </Route>
-        <Route path={"/login"} element={<Login />} />
-        <Route path={"/signUp"} element={<SignUp />}>
-          <Route path={"names"} element={<Username />} />
-          <Route path={"password"} element={<Password />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signUp" element={<SignUp />}>
+          <Route path="names" element={<Username />} />
+          <Route path="password" element={<Password />} />
         </Route>
       </Routes>
     </BrowserRouter>

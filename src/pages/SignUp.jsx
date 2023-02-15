@@ -26,24 +26,24 @@ export function Username() {
   return (
     <div>
       Step 1
-      <div className={"container"}>
-        <input className={"input"} id={"firstName"}
-          type={"text"} placeholder={"First name"}
+      <div className="container">
+        <input className="input" id="firstName"
+          type="text" placeholder="First name"
           onChange={handleCredentials} />
       </div>
-      <div className={"container"}>
-        <input className={"input"} id={"lastName"}
-          type={"text"} placeholder={"Last name"}
+      <div className="container">
+        <input className="input" id="lastName"
+          type="text" placeholder="Last name"
           onChange={handleCredentials} />
       </div>
-      <div className={"container"}>
-        <input className={"input"} id={"mail"}
-          type={"text"} placeholder={"Enter eMail"}
+      <div className="container">
+        <input className="input" id="mail"
+          type="text" placeholder="Enter eMail"
           onChange={handleCredentials} />
       </div>
-      <button className={"signUpButton"} id={"button"}
+      <button className="signUpButton" id="button"
         disabled={credentials} onClick={click}>
-        <AiOutlineArrowRight size={"25px"} />
+        <AiOutlineArrowRight size="25px" />
       </button>
     </div>
   );
@@ -106,24 +106,24 @@ export function Password() {
   return (
     <div>
       Step 2
-      <div className={"container"}>
-        <input className={"input"} id={"username"}
-          type={"text"} onChange={handleCredentials}
-          placeholder={"Username"} />
+      <div className="container">
+        <input className="input" id="username"
+          type="text" onChange={handleCredentials}
+          placeholder="Username" />
       </div>
-      <div className={"container"}>
-        <input className={"input"} id={"password1"}
-          type={"password"} onChange={handleCredentials}
-          placeholder={"Password"} />
+      <div className="container">
+        <input className="input" id="password1"
+          type="password" onChange={handleCredentials}
+          placeholder="Password" />
       </div>
-      <div className={"container"}>
-        <input className={"input"} id={"password2"}
-          type={"password"} onChange={handleCredentials}
-          placeholder={"Enter Password again"} />
+      <div className="container">
+        <input className="input" id="password2"
+          type="password" onChange={handleCredentials}
+          placeholder="Enter Password again" />
       </div>
-      <div className={"container"}>
-        <button className={"signUpButton"} disabled={credentials}
-          type={"button"} onClick={signUp}>
+      <div className="container">
+        <button className="signUpButton" disabled={credentials}
+          type="button" onClick={signUp}>
           SignUp
         </button>
       </div>
@@ -138,12 +138,12 @@ export function SignUp() {
   });
 
   return (
-    <div className={"signUp"}>
-      <div id={"border"}>
+    <div className="signUp">
+      <div id="border">
         <div>
-          <img id={"logo"} src={logo} alt={"logo"} />
+          <img id="logo" src={logo} alt="logo" />
         </div>
-        <div id={"title"}>
+        <div id="title">
           SignUp to Twitter
         </div>
         <Outlet />

@@ -55,30 +55,31 @@ export default function Content(props) {
   function redirect() {
     navigate("tweet", { state: props });
   }
+
   function profile() {
     navigate("profile", {state: {self: false, username: props.data.author}});
   }
 
   return (
-    <div className={"content"}>
-      <div className={"top"}>
+    <div className="content">
+      <div className="top">
         <div>
           <div onClick={profile} style={{cursor: "pointer"}}>
             <div>{props.data.author_name}</div>
-            <b className={"username"}>@{props.data.author}</b>
+            <b className="username">@{props.data.author}</b>
           </div>
         </div>
-        <div className={"contentAge"}>Posted {props.data.age}</div>
+        <div className="contentAge">Posted {props.data.age}</div>
       </div>
-      <div className={"body"} onClick={redirect}>{props.data.body}</div>
-      <div id={"actions"}>
-        <div className={"actionElements"} onClick={like}>
-          {state.likedByUser ? <RiHeartFill size={"20px"} color={"red"} />
-            : <RiHeartLine size={"20px"} color={"gray"} />}
+      <div className="body" onClick={redirect}>{props.data.body}</div>
+      <div id="actions">
+        <div className="actionElements" onClick={like}>
+          {state.likedByUser ? <RiHeartFill size="20px" color="red" />
+            : <RiHeartLine size="20px" color="gray" />}
           <div>{state.likesCount}</div>
         </div>
-        <div className={"actionElements"}>
-          <RiMessageLine size={"20px"} color={"gray"} />
+        <div className="actionElements">
+          <RiMessageLine size="20px" color="gray" />
           <div>{props.data.comment_count}</div>
         </div>
       </div>
