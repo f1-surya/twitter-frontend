@@ -63,6 +63,12 @@ export default function LeftNavBar() {
       });
   }
 
+  function adjustHeight(e) {
+    const element = e.target;
+    element.style.height = "1px";
+    element.style.height = (element.scrollHeight) + "px";
+  }
+
   return (
     <header className="layout" id="leftNavBar">
       <img src={logo} alt="Logo" />
@@ -83,7 +89,8 @@ export default function LeftNavBar() {
       <button id="tweetButton" type="button" onClick={openTweetForm}>Tweet</button>
       <div id="formPopup">
         <textarea id="tweetBox" type="text"
-          placeholder="What's happening?" name="Tweet" />
+          placeholder="What's happening?" name="Tweet"
+          onChange={adjustHeight} />
         <br />
         <button id="post" type="button" onClick={post}>Post</button>
         <br />
@@ -91,5 +98,5 @@ export default function LeftNavBar() {
         <br />
       </div>
     </header>
-  )
+  );
 }

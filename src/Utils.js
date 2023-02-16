@@ -48,19 +48,25 @@ function contentAge(content) {
   }
 }
 
-export function fetchData(url, setState) {
+export function fetchData(url, setState, tweets) {
   const config = {
     url: url,
     method: "get",
     headers: { "Authorization": "Token " + sessionStorage.token },
   };
+
   axios(config)
     .then((response) => {
-      response.data.tweets.forEach(contentAge);
+      if (tweets) {
+        response.data.tweets.forEach(contentAge);
+      }
+      else {
+        response.data.likes.forEach(contentAge);
+      }
       setState({
         firstTime: false,
         profile: response.data.profile,
-        content: response.data.tweets
+        content: tweets ? response.data.tweets : response.data.likes
       });
     });
 }

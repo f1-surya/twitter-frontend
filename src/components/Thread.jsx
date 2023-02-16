@@ -11,20 +11,9 @@ export default function Thread() {
   const tweet = location.state.data;
   const [commentCount, setCommentCount] = useState(tweet.comment_count);
   const [state, setState] = useState({ firstTime: true, data: [] });
-  
+
   if (state.firstTime) {
     getData(setState, "http://0.0.0.0/comment/" + tweet.id);
-  }
-
-  const tx = document.getElementsByTagName("textarea");
-  for (let i = 0; i < tx.length; i++) {
-    tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
-    tx[i].addEventListener("input", OnInput, false);
-  }
-
-  function OnInput() {
-    this.style.height = 0;
-    this.style.height = (this.scrollHeight) + "px";
   }
 
   function reply() {
@@ -49,6 +38,12 @@ export default function Thread() {
     }
   }
 
+  function adjustHeight(e) {
+    const element = e.target;
+    element.style.height = "1px";
+    element.style.height = (element.scrollHeight) + "px";
+  }
+
   return (
     <div className="wrapper">
       <div id="selectedTweet">
@@ -67,7 +62,8 @@ export default function Thread() {
           </div>
         </div>
         <div className="createComment">
-          <textarea id="newComment" type="text" placeholder="Tweet your reply" defaultValue="" />
+          <textarea id="newComment" type="text" placeholder="Tweet your reply" defaultValue=""
+            onChange={adjustHeight} />
           <button id="replyButton" type="button" onClick={reply}>
             Reply
           </button>

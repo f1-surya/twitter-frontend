@@ -36,3 +36,7 @@
   text-align: left;
   padding: 2px;
 }
+
+.content:hover {
+  background: #333840;
+}
