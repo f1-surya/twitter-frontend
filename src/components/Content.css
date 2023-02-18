@@ -4,9 +4,14 @@
   justify-content: space-between;
 }
 
+.namesContent {
+  display: flex;
+}
+
 .username {
-  padding: 5px;
+  padding-left: 2px;
   font-size: 16px;
+  color: gray;
 }
 
 .contentAge {

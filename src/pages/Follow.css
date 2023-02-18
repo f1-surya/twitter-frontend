@@ -1,0 +1,17 @@
+.topBar {
+  padding: 10px;
+  display: flex;
+}
+
+.back {
+  padding: 5px;
+}
+
+.fullName {
+  font-size: 20px;
+}
+
+.userTag {
+  color: gray;
+  font-size: 15px;
+}

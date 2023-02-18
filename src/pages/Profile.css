@@ -18,15 +18,14 @@
   grid-column: 1;
 }
 
-.following {
-  padding-right: 40px;
+.followsTiles {
   display: flex;
   color: gray;
+  cursor: pointer;
 }
 
-.followers {
-  display: flex;
-  color: gray;
+#followingCount {
+  padding-right: 40px;
 }
 
 .numbers {

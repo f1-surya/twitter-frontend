@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import Thread from "./components/Thread";
 import Layout from "./Layout";
+import Follow from "./pages/Follow";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
@@ -15,8 +16,12 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="profile">
+            <Route path=":user" element={<Profile />} />
+            <Route path=":user/:type" element={<Follow />} />
+          </Route>
           <Route path="tweet" element={<Thread />} />
+          <Route path="follows" element={<Follow />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signUp" element={<SignUp />}>

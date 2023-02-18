@@ -56,18 +56,14 @@ export default function Content(props) {
     navigate("tweet", { state: props });
   }
 
-  function profile() {
-    navigate("profile", {state: {self: false, username: props.data.author}});
-  }
-
   return (
     <div className="content">
       <div className="top">
         <div>
-          <div onClick={profile} style={{cursor: "pointer"}}>
-            <div>{props.data.author_name}</div>
-            <b className="username">@{props.data.author}</b>
-          </div>
+          <a className="namesContent" href={`/profile/${props.data.author}`} style={{cursor: "pointer"}}>
+            <b>{props.data.author_name}</b>
+            <div className="username">@{props.data.author}</div>
+          </a>
         </div>
         <div className="contentAge">Posted {props.data.age}</div>
       </div>

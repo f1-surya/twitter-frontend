@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { RiHeartFill, RiHeartLine, RiMessageLine } from 'react-icons/ri';
-import { useLocation } from 'react-router-dom';
+import {HiArrowLeft} from "react-icons/hi";
+import { useLocation, useNavigate } from 'react-router-dom';
 import getData from '../Utils';
 import Content from './Content.jsx';
 import "./Thread.css";
@@ -11,6 +12,7 @@ export default function Thread() {
   const tweet = location.state.data;
   const [commentCount, setCommentCount] = useState(tweet.comment_count);
   const [state, setState] = useState({ firstTime: true, data: [] });
+  const navigate = useNavigate();
 
   if (state.firstTime) {
     getData(setState, "http://0.0.0.0/comment/" + tweet.id);
@@ -24,17 +26,17 @@ export default function Thread() {
         url: "http://0.0.0.0/comment/" + tweet.id,
         data: { body: reply },
         headers: { Authorization: "Token " + sessionStorage.token }
-      }
+      };
 
       axios(config).then((response) => {
         document.getElementById("newComment").value = "";
         getData();
-        setCommentCount(commentCount + 1)
+        setCommentCount(commentCount + 1);
       })
         .catch(error => console.log(error));
     }
     else {
-      alert("Comment can't be empty")
+      alert("Comment can't be empty");
     }
   }
 
@@ -44,11 +46,18 @@ export default function Thread() {
     element.style.height = (element.scrollHeight) + "px";
   }
 
+  function back() {
+    navigate(-1);
+  }
+
   return (
     <div className="wrapper">
+      <div className="back" onClick={back}>
+        <HiArrowLeft size={"25px"} />
+      </div>
       <div id="selectedTweet">
-        <div style={{ paddingLeft: "10px" }}>{tweet.author_name}</div>
-        <b style={{ paddingLeft: "12px" }}>@{tweet.author}</b>
+        <b style={{ paddingLeft: "10px" }}>{tweet.author_name}</b>
+        <div className="username" style={{ paddingLeft: "12px", paddingBottom: "10px" }}>@{tweet.author}</div>
         <div className="body">{tweet.body}</div>
         <div className="actions">
           <div className="actionsContent">

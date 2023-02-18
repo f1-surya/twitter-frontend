@@ -40,10 +40,6 @@ export default function LeftNavBar() {
     }
   }
 
-  function profile() {
-    navigate("profile", { state: {self: true} });
-  }
-
   function logout() {
     const config = {
       method: "post",
@@ -77,10 +73,10 @@ export default function LeftNavBar() {
           <CgHome size="22px" />
           <b className="routes">Home</b>
         </a>
-        <div className="navDestiny" onClick={profile}>
+        <a className="navDestiny" href={`/profile/${sessionStorage.username}`}>
           <CgProfile size="23px" />
           <b className="routes">Profile</b>
-        </div>
+        </a>
         <div className="navDestiny" onClick={logout}>
           <CgLogOut size="23px" />
           <b className="routes">LogOut</b>

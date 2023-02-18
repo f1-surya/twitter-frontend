@@ -63,6 +63,8 @@ export function fetchData(url, setState, tweets) {
       else {
         response.data.likes.forEach(contentAge);
       }
+      sessionStorage.otherUser = response.data.profile.user;
+      sessionStorage.fullName = response.data.profile.full_name;
       setState({
         firstTime: false,
         profile: response.data.profile,
