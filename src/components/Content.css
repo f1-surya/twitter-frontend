@@ -1,7 +1,6 @@
 .top {
   display: flex;
   padding: 10px;
-  justify-content: space-between;
 }
 
 .namesContent {
@@ -15,15 +14,16 @@
 }
 
 .contentAge {
-  padding: 10px;
+  padding: 4px;
   font-size: 13px;
+  color: gray;
 }
 
 .body {
   white-space: pre-line;
-  padding: 10px 60px 10px 60px;
-  justify-content: space-between;
+  padding: 0px 60px 0px 60px;
   cursor: pointer;
+  margin: 0;
 }
 
 .actionElements {
@@ -39,7 +39,6 @@
 .content {
   border-bottom: 1px solid gray;
   text-align: left;
-  padding: 2px;
 }
 
 .content:hover {

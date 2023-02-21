@@ -39,6 +39,8 @@ export default function Login() {
     }
   }
 
+  document.title = "Login to twitter";
+
   return (
     <div className="login">
       <img id="logo" src={logo} alt="logo" />

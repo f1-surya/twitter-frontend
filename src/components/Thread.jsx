@@ -50,6 +50,8 @@ export default function Thread() {
     navigate(-1);
   }
 
+  document.title = `${tweet.author_name} on Twitter`
+
   return (
     <div className="wrapper">
       <div className="back" onClick={back}>

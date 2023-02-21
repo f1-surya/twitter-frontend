@@ -14,20 +14,17 @@
 }
 
 .navBox {
-  display: flex;
-  flex-direction: column;
   padding-bottom: 50px;
   padding-top: 20px;
-  padding-left: 31%;
 }
 
 .navDestiny {
+  width: 90%;
   display: flex;
   justify-content: center;
   color: white;
   padding: 10px;
   cursor: pointer;
-  width: fit-content;
   border-radius: 15px;
 }
 

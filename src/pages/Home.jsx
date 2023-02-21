@@ -20,6 +20,7 @@ export default function Home() {
   }, [navigate, state]
   );
 
+  document.title = "Home"
 
   return (
     <main>

@@ -59,15 +59,13 @@ export default function Content(props) {
   return (
     <div className="content">
       <div className="top">
-        <div>
-          <a className="namesContent" href={`/profile/${props.data.author}`} style={{cursor: "pointer"}}>
-            <b>{props.data.author_name}</b>
-            <div className="username">@{props.data.author}</div>
-          </a>
-        </div>
-        <div className="contentAge">Posted {props.data.age}</div>
+        <a className="namesContent" href={`/profile/${props.data.author}`} style={{ cursor: "pointer" }}>
+          <b>{props.data.author_name}</b>
+          <div className="username">@{props.data.author}</div>
+        </a>
+        <div className="contentAge">- {props.data.age}</div>
       </div>
-      <div className="body" onClick={redirect}>{props.data.body}</div>
+      <p className="body" onClick={redirect}>{props.data.body}</p>
       <div id="actions">
         <div className="actionElements" onClick={like}>
           {state.likedByUser ? <RiHeartFill size="20px" color="red" />

@@ -55,3 +55,65 @@
   padding: 10px;
   cursor: pointer;
 }
+
+#edit {
+  display: none;
+  left: 25%;
+  top: 100px;
+  position: fixed;
+  border: 1px solid gray;
+  width: 40%;
+  height: fit-content;
+  min-height: 300px;
+  background: #26292d;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 10px;
+}
+
+#actionBar {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+#close {
+  padding-top: 3px;
+  border-radius: 60px;
+  cursor: pointer;
+}
+
+#saveButton {
+  background: white;
+  border: none;
+  width: 75px;
+  height: 30px;
+  border-radius: 20px;
+}
+
+.editOptions {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputWrapper {
+  border-radius: 5px;
+  border: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin: 5px;
+}
+
+.label {
+  color: gray;
+  font-size: 13px;
+  padding: 5px;
+}
+
+.editFields {
+  background: inherit;
+  border: none;
+  color: white;
+  font-size: 20px;
+}

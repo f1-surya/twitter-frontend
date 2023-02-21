@@ -32,10 +32,6 @@
   border-bottom: 1px solid white;
 }
 
-.loginCredentials:focus {
-  outline: none;
-}
-
 .button {
   height: 45px;
   width: 15%;
