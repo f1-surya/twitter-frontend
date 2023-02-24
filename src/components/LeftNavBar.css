@@ -7,6 +7,9 @@
   width: 20%;
   height: 100%;
   border-right: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .routes {
@@ -19,7 +22,7 @@
 }
 
 .navDestiny {
-  width: 90%;
+  width: fit-content;
   display: flex;
   justify-content: center;
   color: white;
@@ -35,8 +38,8 @@
 #tweetButton {
   background: #1DA1F2;
   color: white;
-  width: 70%;
-  height: 50px;
+  width: 50%;
+  height: 7%;
   border-radius: 30px;
   border: none;
   font-size: 20px;

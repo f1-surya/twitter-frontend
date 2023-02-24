@@ -1,0 +1,12 @@
+.message {
+  padding: 10px;
+  border-bottom: 1px solid gray;
+}
+
+p {
+  margin: 0;
+}
+
+h3 {
+  margin: 0;
+}

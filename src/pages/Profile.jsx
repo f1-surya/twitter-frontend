@@ -20,7 +20,7 @@ export default function Profile() {
     if (state.firstTime) {
       const button = document.getElementById("multiButton");
       if (self) {
-        const url = `http://0.0.0.0/profile/tweets/${sessionStorage.username}`;
+        const url = `http://0.0.0.0/profile?query=tweets&username=${sessionStorage.username}`;
         fetchData(url, setState, true);
         button.innerHTML = "Edit";
         button.style.backgroundColor = "inherit";
@@ -28,7 +28,7 @@ export default function Profile() {
         button.style.color = "white";
       }
       else {
-        const url = `http://0.0.0.0/profile/tweets/${user}`;
+        const url = `http://0.0.0.0/profile?query=tweets&username=${user}`;
         fetchData(url, setState, true);
       }
     }
@@ -42,7 +42,6 @@ export default function Profile() {
 
   function action() {
     if (!self) {
-      console.log("if");
       const config = {
         url: "http://0.0.0.0/profile",
         method: "put",
@@ -55,7 +54,7 @@ export default function Profile() {
         }
       };
       axios(config).then((response) => {
-        const url = `http://0.0.0.0/profile/tweets/${sessionStorage.username}`;
+        const url = `http://0.0.0.0/profile?query=tweets&username=${user}`;
         fetchData(url, setState, true);
       })
     }
@@ -65,10 +64,7 @@ export default function Profile() {
   }
 
   function getLikes() {
-    let url = `http://0.0.0.0/profile/likes/${user}`;
-    if (self) {
-      url = `http://0.0.0.0/profile/likes/${sessionStorage.username}`;
-    }
+    const url = `http://0.0.0.0/profile?query=likes&username=${user}`;
 
     fetchData(url, setState, false);
     document.getElementById("tweets").style.borderBottom = "none";
@@ -160,7 +156,6 @@ export default function Profile() {
       data.edit_about = "true";
       data.about = about;
     }
-    console.log(firstName, lastName);
     config.data = data;
 
     if (firstNameChanged || lastNameChanged || aboutChanged) {

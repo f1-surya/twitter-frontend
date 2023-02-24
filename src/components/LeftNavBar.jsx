@@ -67,7 +67,9 @@ export default function LeftNavBar() {
 
   return (
     <header className="layout" id="leftNavBar">
-      <img src={logo} alt="Logo" />
+      <div>
+        <img src={logo} alt="Logo" />
+      </div>
       <div className="navBox">
         <a className="navDestiny" href="/">
           <CgHome size="22px" />

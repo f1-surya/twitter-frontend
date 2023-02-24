@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import { SignUp, Username, Password } from "./pages/SignUp";
+import UserList from "./pages/UserList";
 
 export default function App() {
 
@@ -21,6 +22,7 @@ export default function App() {
             <Route path=":user/:type" element={<Follow />} />
           </Route>
           <Route path="tweet" element={<Thread />} />
+          <Route path="users" element={<UserList />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signUp" element={<SignUp />}>

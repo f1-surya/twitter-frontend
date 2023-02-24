@@ -10,17 +10,20 @@ export default function Home() {
 
   useEffect(() => {
     if (sessionStorage.token === undefined) {
-      navigate("/login")
+      navigate("/login");
     }
     else {
       if (state.firstTime) {
-        getData(setState, `http://0.0.0.0/`)
+        getData(setState, `http://0.0.0.0/`);
+      }
+      else if (state.data.length === 0) {
+        navigate("/users");
       }
     }
   }, [navigate, state]
   );
 
-  document.title = "Home"
+  document.title = "Home";
 
   return (
     <main>

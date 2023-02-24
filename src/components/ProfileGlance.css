@@ -1,0 +1,31 @@
+.profileGlance {
+  padding: 5px;
+  border-bottom: 1px solid gray;
+  cursor: pointer;
+  color: white;
+  display: flex;
+}
+
+.details {
+  width: 80%;
+}
+
+.userTag {
+  color: gray;
+  font-size: 15px;
+}
+
+.buttonContainer {
+  display: flex;
+  width: 20%;
+  align-items: center;
+  justify-content: center;
+}
+
+.followButton {
+  width: 60%;
+  height: 35px;
+  border: none;
+  border-radius: 20px;
+  font-weight: bolder;
+}

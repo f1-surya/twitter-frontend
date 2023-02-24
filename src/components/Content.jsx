@@ -1,14 +1,15 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RiHeartFill, RiHeartLine, RiMessageLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import "./Content.css";
 
 export default function Content(props) {
-  const [state, setState] = useState({
-    likedByUser: props.data.liked_by_user,
-    likesCount: props.data.likes_count
-  });
+  const [state, setState] = useState({});
+  useEffect(() => {
+    setState({ likedByUser: props.data.liked_by_user, likesCount: props.data.likes_count });
+  }, [props, setState])
+
   const navigate = useNavigate();
 
   function like() {

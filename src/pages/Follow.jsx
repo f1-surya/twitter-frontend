@@ -1,25 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { HiArrowLeft } from "react-icons/hi";
 import { useNavigate, useParams } from "react-router-dom";
+import ProfileGlance from "../components/ProfileGlance";
 import getData from "../Utils";
 import "./Follow.css";
-
-function ProfileGlance({ profile, currUser }) {
-  const navigate = useNavigate();
-  const hide = currUser === profile.user || profile.user === sessionStorage.username;
-
-  function goToProfile() {
-    navigate("/profile", { state: { self: false, username: profile.user } });
-  }
-
-  return (
-    <div className="result" onClick={goToProfile} style={hide ? { display: "none" } : {}}>
-      <b>{profile.full_name}</b>
-      <div className="userTag">@{profile.user}</div>
-      <p>{profile.about}</p>
-    </div>
-  );
-}
 
 export default function Follow() {
   const { user, type } = useParams();
@@ -27,7 +11,7 @@ export default function Follow() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getData(setState, `http://0.0.0.0/profile/${type}/${user}`);
+    getData(setState, `http://0.0.0.0/profile?query=${type}&username=${user}`);
   }, [setState, type, user]);
 
   function back() {
