@@ -19,17 +19,13 @@ export default function LeftNavBar() {
     const tweet = document.getElementById("tweetBox").value;
 
     if (tweet.length > 0) {
-      const data = new FormData();
-      data.append("body", tweet)
-
       const config = {
         method: "post",
-        url: "http://0.0.0.0",
-        data: data,
+        url: "http://0.0.0.0/tweet",
+        data: { body: tweet },
         headers: { Authorization: "Token " + sessionStorage.token }
       }
       axios(config).then((response) => {
-        console.log(response);
         document.getElementById("tweetBox").value = ""
         closeTweetForm();
       })

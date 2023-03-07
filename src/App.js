@@ -21,7 +21,7 @@ export default function App() {
             <Route path=":user" element={<Profile />} />
             <Route path=":user/:type" element={<Follow />} />
           </Route>
-          <Route path="tweet" element={<Thread />} />
+          <Route path="content/:pk" element={<Thread />} />
           <Route path="users" element={<UserList />} />
         </Route>
         <Route path="/login" element={<Login />} />

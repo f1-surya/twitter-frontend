@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default function getData(setState, url) {
+export default function getData(setState, url, thread) {
   const config = {
     method: "get",
     url: url,
@@ -12,15 +12,21 @@ export default function getData(setState, url) {
   axios(config)
     .then((response) => {
       if (Array.isArray(response.data) && response.data.length > 0) {
-        response.data.forEach(contentAge);
+        if (thread) {
+          response.data[1].forEach(contentAge);
+          setState({ firstTime: false, data: response.data[1], parent: response.data[0] });
+        }
+        else {
+          response.data.forEach(contentAge);
+          setState({ firstTime: false, data: response.data });
+        }
       }
-      setState({ firstTime: false, data: response.data });
     })
     .catch(error => console.log(error));
 }
 
-function contentAge(content) {
-  const postedDate = new Date(content.posted_date);
+export function contentAge(content) {
+  const postedDate = new Date(content.meta.posted_date);
   const now = Date.now();
   const diffTime = Math.abs(postedDate - now);
   const diffMinutes = Math.ceil(diffTime / 60000);
@@ -44,7 +50,7 @@ function contentAge(content) {
     content["age"] = diffDays + "days ago";
   }
   else if (diffMonths >= 1) {
-    content["age"] = diffMonths + "monts ago";
+    content["age"] = diffMonths + "months ago";
   }
 }
 

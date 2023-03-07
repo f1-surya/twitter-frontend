@@ -1,0 +1,14 @@
+.threadBeginning {
+  display: flex;
+  padding-top: 5px;
+  padding-left: 13px;
+}
+
+.pTag {
+  color: rgb(173, 171, 171);
+  font-size: 15px;
+}
+
+.list {
+  width: 100%;
+}

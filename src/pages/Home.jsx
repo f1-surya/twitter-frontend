@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Content from "../components/Content.jsx";
+import MiniThread from "../components/MiniThread.jsx";
 import getData from "../Utils.js";
 import "./Home.css";
 
@@ -28,7 +29,12 @@ export default function Home() {
   return (
     <main>
       <div>
-        {state.data.map((tweet, i) => (<Content data={tweet} key={i} tweet={true} />))}
+        {state.data.map((content, i) => {
+          if (content.comments.length > 0) {
+            return <MiniThread data={content} key={i} />
+          }
+          return <Content data={content} key={i} />
+        })}
       </div>
     </main>
   );
