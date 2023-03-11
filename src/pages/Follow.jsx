@@ -11,7 +11,7 @@ export default function Follow() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getData(setState, `http://0.0.0.0/profile?query=${type}&username=${user}`);
+    getData(setState, `http://65.1.114.106/api/profile?query=${type}&username=${user}`, "profile");
   }, [setState, type, user]);
 
   function back() {

@@ -15,7 +15,7 @@ export default function Home() {
     }
     else {
       if (state.firstTime) {
-        getData(setState, `http://0.0.0.0/`);
+        getData(setState, `http://65.1.114.106/api/`);
       }
       else if (state.data.length === 0) {
         navigate("/users");

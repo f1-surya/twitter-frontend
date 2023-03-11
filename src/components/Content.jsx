@@ -32,11 +32,11 @@ export default function Content(props) {
         </a>
         <div className="contentAge">- {props.data.content.age}</div>
       </div>
-      <a className="reTweetBody" href={`content/${props.data.content.meta.id}`}>{props.data.content.body}</a>
+      <a className="reTweetBody" href={`/content/${props.data.content.meta.id}`}>{props.data.content.body}</a>
     </div>;
   }
   else {
-    content = <a className="body" href={`content/${props.data.meta.id}`}>{props.data.body}</a>;
+    content = <a className="body" href={`/content/${props.data.meta.id}`}>{props.data.body}</a>;
   }
 
   let style;
@@ -68,7 +68,7 @@ export default function Content(props) {
   function like() {
     const config = {
       method: "put",
-      url: "http://0.0.0.0",
+      url: "http://65.1.114.106/api/",
       headers: {
         Authorization: `Token ${sessionStorage.token}`
       },
@@ -91,7 +91,8 @@ export default function Content(props) {
 
   function reTweet() {
     const config = {
-      url: state.retweetedByUser ? `http://0.0.0.0/retweet?pk=${props.data.meta.id}` : "http://0.0.0.0/retweet",
+      url: state.retweetedByUser ?
+        `http://65.1.114.106/api/retweet?pk=${props.data.meta.id}` : "http://65.1.114.106/api/retweet",
       method: state.retweetedByUser ? "delete" : "post",
       headers: { "Authorization": `Token ${sessionStorage.token}` },
       data: { pk: props.data.meta.id }

@@ -7,7 +7,7 @@ export default function UserList() {
   const [state, setState] = useState({firstTime: true, data: []});
   useEffect(() => {
     if (state.firstTime) {
-      getData(setState, "http://0.0.0.0/profile?query=profileList");
+      getData(setState, "http://65.1.114.106/api/profile?query=profileList", "profile");
     }
   }, [state, setState]);
   

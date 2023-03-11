@@ -29,7 +29,7 @@ export default function Explore() {
     const value = document.getElementById("searchBar").value;
     if (value.length > 0) {
       document.getElementById("clearButton").style.display = "block";
-      getData(setState, `http://0.0.0.0/profile?query=search&username=${value}`);
+      getData(setState, `http://65.1.114.106/api/profile?query=search&username=${value}`, "search");
     }
     else {
       setState({ firstTime: false, data: [] });

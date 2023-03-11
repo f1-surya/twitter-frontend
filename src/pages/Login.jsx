@@ -20,7 +20,7 @@ export default function Login() {
 
     const config = {
       method: "post",
-      url: "http://0.0.0.0/login",
+      url: "http://65.1.114.106/api/login",
       data: {
         username: userName,
         password: password
@@ -34,7 +34,7 @@ export default function Login() {
           navigate('/');
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.data);
         });
     }
   }

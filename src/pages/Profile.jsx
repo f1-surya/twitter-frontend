@@ -20,7 +20,7 @@ export default function Profile() {
     if (state.firstTime) {
       const button = document.getElementById("multiButton");
       if (self) {
-        const url = `http://0.0.0.0/profile?query=tweets&username=${sessionStorage.username}`;
+        const url = `http://65.1.114.106/api/profile?query=tweets&username=${sessionStorage.username}`;
         fetchData(url, setState, true);
         button.innerHTML = "Edit";
         button.style.backgroundColor = "inherit";
@@ -28,7 +28,7 @@ export default function Profile() {
         button.style.color = "white";
       }
       else {
-        const url = `http://0.0.0.0/profile?query=tweets&username=${user}`;
+        const url = `http://65.1.114.106/api/profile?query=tweets&username=${user}`;
         fetchData(url, setState, true);
       }
     }
@@ -43,7 +43,7 @@ export default function Profile() {
   function action() {
     if (!self) {
       const config = {
-        url: "http://0.0.0.0/profile",
+        url: "http://65.1.114.106/api/profile",
         method: "put",
         headers: {
           Authorization: `Token ${sessionStorage.token}`
@@ -54,7 +54,7 @@ export default function Profile() {
         }
       };
       axios(config).then((response) => {
-        const url = `http://0.0.0.0/profile?query=tweets&username=${user}`;
+        const url = `http://65.1.114.106/api/profile?query=tweets&username=${user}`;
         fetchData(url, setState, true);
       })
     }
@@ -64,7 +64,7 @@ export default function Profile() {
   }
 
   function getLikes() {
-    const url = `http://0.0.0.0/profile?query=likes&username=${user}`;
+    const url = `http://65.1.114.106/api/profile?query=likes&username=${user}`;
 
     fetchData(url, setState, false);
     document.getElementById("tweets").style.borderBottom = "none";
@@ -128,7 +128,7 @@ export default function Profile() {
   function save() {
     const config = {
       method: "put",
-      url: "http://0.0.0.0/profile",
+      url: "http://65.1.114.106/api/profile",
       headers: {
         Authorization: `Token ${sessionStorage.token}`
       }

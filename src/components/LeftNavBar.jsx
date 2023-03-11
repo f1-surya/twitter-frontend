@@ -21,7 +21,7 @@ export default function LeftNavBar() {
     if (tweet.length > 0) {
       const config = {
         method: "post",
-        url: "http://0.0.0.0/tweet",
+        url: "http://65.1.114.106/api/tweets",
         data: { body: tweet },
         headers: { Authorization: "Token " + sessionStorage.token }
       }
@@ -39,7 +39,7 @@ export default function LeftNavBar() {
   function logout() {
     const config = {
       method: "post",
-      url: "http://0.0.0.0/logout",
+      url: "http://65.1.114.106/api/logout",
       headers: {
         Authorization: "Token " + sessionStorage.token
       }

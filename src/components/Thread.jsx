@@ -17,7 +17,7 @@ export default function Thread() {
   const navigate = useNavigate();
 
   if (state.firstTime) {
-    getData(setState, `http://0.0.0.0/comment/${pk}`, true);
+    getData(setState, `http://65.1.114.106/api/comment/${pk}`, "thread");
   }
 
   if (!state.data || !state.parent) {
@@ -46,14 +46,14 @@ export default function Thread() {
     if (reply.length > 0) {
       const config = {
         method: "post",
-        url: "http://0.0.0.0/comment/" + state.parent.meta.id,
+        url: "http://65.1.114.106/api/comment/" + state.parent.meta.id,
         data: { body: reply },
         headers: { Authorization: "Token " + sessionStorage.token }
       };
 
       axios(config).then((response) => {
         document.getElementById("newComment").value = "";
-        getData();
+        window.location.reload();
         setState({
           ...state,
           commentCount: state.parent.meta.comment_count + 1
@@ -79,7 +79,7 @@ export default function Thread() {
   function like() {
     const config = {
       method: "put",
-      url: "http://0.0.0.0",
+      url: "http://65.1.114.106/api",
       headers: {
         Authorization: `Token ${sessionStorage.token}`
       },

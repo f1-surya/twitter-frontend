@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default function getData(setState, url, thread) {
+export default function getData(setState, url, type) {
   const config = {
     method: "get",
     url: url,
@@ -12,9 +12,12 @@ export default function getData(setState, url, thread) {
   axios(config)
     .then((response) => {
       if (Array.isArray(response.data) && response.data.length > 0) {
-        if (thread) {
+        if (type === "thread") {
           response.data[1].forEach(contentAge);
           setState({ firstTime: false, data: response.data[1], parent: response.data[0] });
+        }
+        else if (type === "search" || type === "profile") {
+          setState({ firstTime: false, data: response.data });
         }
         else {
           response.data.forEach(contentAge);

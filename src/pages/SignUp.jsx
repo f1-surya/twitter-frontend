@@ -67,7 +67,7 @@ export function Password() {
       const username = document.getElementById("username").value;
       const config = {
         method: "post",
-        url: "http://0.0.0.0/register",
+        url: "http://65.1.114.106/api/register",
         data: {
           first_name: sessionStorage.firstName,
           last_name: sessionStorage.lastName,
@@ -80,7 +80,7 @@ export function Password() {
         (response) => {
           const login = {
             method: "post",
-            url: "http://0.0.0.0/login",
+            url: "http://65.1.114.106/api/login",
             data: {
               username: username,
               password: password1

@@ -21,7 +21,7 @@ export default function ProfileGlance({ profile, currUser }) {
 
   function follow() {
     const config = {
-      url: "http://0.0.0.0/profile",
+      url: "http://65.1.114.106/api/profile",
       method: "put",
       headers: {
         Authorization: `Token ${sessionStorage.token}`
