@@ -6,6 +6,10 @@
   background: inherit
 }
 
+.body {
+  padding: 0px 10px 10px 10px;
+}
+
 .actions {
   border-top: 1px solid gray;
   border-bottom: 1px solid gray;

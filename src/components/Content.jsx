@@ -36,7 +36,7 @@ export default function Content(props) {
     </div>;
   }
   else {
-    content = <a className="body" href={`/content/${props.data.meta.id}`}>{props.data.body}</a>;
+    content = <div className="bodyWrapper"><a className="body" href={`/content/${props.data.meta.id}`}>{props.data.body}</a></div>;
   }
 
   let style;
