@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +18,7 @@ export default function ProfileGlance({ profile, currUser }) {
     backgroundColor: "inherit",
     border: "2px solid white",
     color: "white"
-  }
+  };
 
   function follow() {
     const config = {

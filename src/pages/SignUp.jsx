@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { Outlet, useNavigate } from "react-router-dom";
 import logo from "../logo.svg";
@@ -88,9 +88,9 @@ export function Password() {
           };
           axios(login)
             .then((response) => {
-              sessionStorage.clear()
+              sessionStorage.clear();
               sessionStorage.token = response.data["token"];
-              navigate('/');
+              navigate("/");
             })
             .catch((error) => {
               console.log(error);
@@ -99,7 +99,7 @@ export function Password() {
       ).catch((error) => console.log(error));
     }
     else {
-      alert("Passwords don't match")
+      alert("Passwords don't match");
     }
   }
 
@@ -128,13 +128,13 @@ export function Password() {
         </button>
       </div>
     </div>
-  )
+  );
 }
 
 
 export function SignUp() {
   useEffect(() => {
-    document.title = "SignUp to Twitter"
+    document.title = "SignUp to Twitter";
   });
 
   return (

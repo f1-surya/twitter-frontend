@@ -31,7 +31,7 @@ export default function Login() {
       axios(config)
         .then((response) => {
           sessionStorage.token = response.data["token"];
-          navigate('/');
+          navigate("/");
         })
         .catch((error) => {
           console.log(error.data);
@@ -66,8 +66,7 @@ export default function Login() {
           </button>
         </div>
       </div>
-      <div id="createAccount">
-        Don't have an account?
+      <div id="createAccount">Don&apos;t have an account?
         <a id="signUp" href="signUp/names"> Sign up</a>
       </div>
     </div>

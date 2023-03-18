@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios";
 import { CgHome, CgLogOut, CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
@@ -24,15 +25,15 @@ export default function LeftNavBar() {
         url: "http://65.1.114.106/api/tweets",
         data: { body: tweet },
         headers: { Authorization: "Token " + sessionStorage.token }
-      }
+      };
       axios(config).then((response) => {
-        document.getElementById("tweetBox").value = ""
+        document.getElementById("tweetBox").value = "";
         closeTweetForm();
       })
         .catch(error => console.log(error));
     }
     else {
-      alert("Tweet body shoudn't be empty")
+      alert("Tweet body shoudn't be empty");
     }
   }
 
@@ -48,7 +49,7 @@ export default function LeftNavBar() {
     axios(config)
       .then((response) => {
         sessionStorage.clear("token");
-        navigate("/login")
+        navigate("/login");
       })
       .catch((error) => {
         console.log(error);
@@ -71,7 +72,7 @@ export default function LeftNavBar() {
           <CgHome size="22px" />
           <b className="routes">Home</b>
         </a>
-        <a className="navDestiny" href={`/profile/${sessionStorage.username}`}>
+        <a className="navDestiny" href={`/profile/${sessionStorage.username}/tweets`}>
           <CgProfile size="23px" />
           <b className="routes">Profile</b>
         </a>

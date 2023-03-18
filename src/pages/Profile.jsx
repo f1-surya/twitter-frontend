@@ -1,43 +1,79 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiArrowLeft } from "react-icons/hi";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Content from "../components/Content";
-import { fetchData } from "../Utils.js";
+import { fetchData } from "../Utils";
 import "./Profile.css";
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "firstName":
+      return {
+        ...state,
+        firstName: action.newValue
+      };
+    case "lastName":
+      return {
+        ...state,
+        lastName: action.newValue
+      };
+    case "about":
+      return {
+        ...state,
+        about: action.newValue
+      };
+    default:
+      return action.state;
+  }
+}
 
 export default function Profile() {
   const [state, setState] = useState({ firstTime: true, profile: {}, content: [] });
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [about, setAbout] = useState("");
-  const { user } = useParams();
+  const [edit, dispatch] = useReducer(reducer, { firstName: "", lastName: "", about: "", });
+  const { user, query } = useParams();
   const self = user === sessionStorage.username;
-  const navigate = useNavigate();
 
   useEffect(() => {
+    switch (query) {
+      case "tweets":
+        document.getElementById("tweets").style.borderBottom = "5px solid #1DA1F2";
+        break;
+      case "retweets":
+        document.getElementById("retweets").style.borderBottom = "5px solid #1DA1F2";
+        break;
+      default:
+        document.getElementById("likes").style.borderBottom = "5px solid #1DA1F2";
+        break;
+    }
+
     if (state.firstTime) {
       const button = document.getElementById("multiButton");
       if (self) {
-        const url = `http://65.1.114.106/api/profile?query=tweets&username=${sessionStorage.username}`;
-        fetchData(url, setState, true);
+        const url = `http://65.1.114.106/api/profile?query=${query}&username=${sessionStorage.username}`;
+        fetchData(url, setState, query);
         button.innerHTML = "Edit";
         button.style.backgroundColor = "inherit";
         button.style.border = "2px solid white";
         button.style.color = "white";
       }
       else {
-        const url = `http://65.1.114.106/api/profile?query=tweets&username=${user}`;
-        fetchData(url, setState, true);
+        const url = `http://65.1.114.106/api/profile?query=${query}&username=${user}`;
+        fetchData(url, setState, query);
       }
     }
     else {
-      setFirstName(state.profile.full_name.split(" ")[0]);
-      setLastName(state.profile.full_name.split(" ")[1]);
-      setAbout(state.profile.about);
+      dispatch({
+        type: "firstTime",
+        state: {
+          firstName: state.profile.full_name.split(" ")[0],
+          lastName: state.profile.full_name.split(" ")[1],
+          about: state.profile.about
+        }
+      });
     }
-  }, [self, state, user]
+  }, [self, state, user, dispatch, query]
   );
 
   function action() {
@@ -54,47 +90,36 @@ export default function Profile() {
         }
       };
       axios(config).then((response) => {
-        const url = `http://65.1.114.106/api/profile?query=tweets&username=${user}`;
-        fetchData(url, setState, true);
-      })
+        setState(
+          {
+            ...state,
+            profile: {
+              ...state.profile,
+              followed_by_user: !state.profile.followed_by_user,
+              followers_count: state.profile.followed_by_user ? state.profile.followers_count - 1 :
+                state.profile.followers_count + 1
+            }
+          }
+        );
+      });
     }
     else {
       document.getElementById("edit").style.display = "block";
     }
   }
 
-  function getLikes() {
-    const url = `http://65.1.114.106/api/profile?query=likes&username=${user}`;
-
-    fetchData(url, setState, false);
-    document.getElementById("tweets").style.borderBottom = "none";
-    document.getElementById("likes").style.borderBottom = "5px solid #1DA1F2";
-  }
-
-  function tweets() {
-    window.location.reload();
-  }
-
   const style = {
     backgroundColor: "inherit",
     border: "2px solid white",
     color: "white"
-  }
+  };
 
   function back() {
-    navigate("/");
+    window.history.back();
   }
 
   function handleInput(event) {
-    if (event.target.id === "firstName") {
-      setFirstName(event.target.value);
-    }
-    else if (event.target.id === "about") {
-      setAbout(event.target.value);
-    }
-    else {
-      setLastName(event.target.value);
-    }
+    dispatch({ type: event.target.id, newValue: event.target.value });
   }
 
   function closeEdit() {
@@ -138,23 +163,23 @@ export default function Profile() {
       edit_first_name: "false",
       edit_last_name: "false",
       edit_about: "false"
-    }
+    };
 
-    const firstNameChanged = firstName !== state.profile.full_name.split(" ")[0];
-    const lastNameChanged = lastName !== state.profile.full_name.split(" ")[1];
-    const aboutChanged = about !== state.profile.about;
+    const firstNameChanged = edit.firstName !== state.profile.full_name.split(" ")[0];
+    const lastNameChanged = edit.lastName !== state.profile.full_name.split(" ")[1];
+    const aboutChanged = edit.about !== state.profile.about;
 
     if (firstNameChanged) {
       data.edit_first_name = "true";
-      data.first_name = firstName;
+      data.first_name = edit.firstName;
     }
     if (lastNameChanged) {
       data.edit_last_name = "true";
-      data.last_name = lastName;
+      data.last_name = edit.lastName;
     }
     if (aboutChanged) {
       data.edit_about = "true";
-      data.about = about;
+      data.about = edit.about;
     }
     config.data = data;
 
@@ -200,13 +225,15 @@ export default function Profile() {
         </button>
       </div>
       <div className="categories">
-        <div className="category" id="tweets" onClick={tweets}
-          style={{ borderBottom: "5px solid #1DA1F2" }}>
+        <a className="category" id="tweets" href={`/profile/${user}/tweets`}>
           Tweets
-        </div>
-        <div className="category" id="likes" onClick={getLikes}>
+        </a>
+        <a className="category" id="retweets" href={`/profile/${user}/retweets`}>
+          Retweets
+        </a>
+        <a className="category" id="likes" href={`/profile/${user}/likes`}>
           Likes
-        </div>
+        </a>
       </div>
       <div>
         {state.content.map((content, i) => <Content data={content} key={i} />)}
@@ -225,7 +252,7 @@ export default function Profile() {
               Firstname
             </label>
             <input className="editFields" id="firstName"
-              type="text" onChange={handleInput} value={firstName}
+              type="text" onChange={handleInput} value={edit.firstName}
               onFocus={focus} onBlur={blur} />
           </div>
           <div className="inputWrapper" id="lastNameWrapper">
@@ -233,7 +260,7 @@ export default function Profile() {
               Lastname
             </label>
             <input className="editFields" id="lastName"
-              type="text" onChange={handleInput} value={lastName}
+              type="text" onChange={handleInput} value={edit.lastName}
               onFocus={focus} onBlur={blur} />
           </div>
           <div className="inputWrapper" id="aboutWrapper">
@@ -241,7 +268,7 @@ export default function Profile() {
               About
             </label>
             <input className="editFields" type="text" id="about"
-              onChange={handleInput} value={about} maxLength="150"
+              onChange={handleInput} value={edit.about} maxLength="150"
               onFocus={focus} onBlur={blur} />
           </div>
         </div>

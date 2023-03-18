@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import search from "../search.png";
@@ -23,7 +24,7 @@ function ProfileTile({ profile, setState }) {
 
 
 export default function Explore() {
-  const [state, setState] = useState({ firstTime: true, data: [] })
+  const [state, setState] = useState({ firstTime: true, data: [] });
 
   function onChange() {
     const value = document.getElementById("searchBar").value;

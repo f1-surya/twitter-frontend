@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Content from "../components/Content.jsx";
 import MiniThread from "../components/MiniThread.jsx";
-import getData from "../Utils.js";
+import getData from "../Utils";
 import "./Home.css";
 
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
     }
     else {
       if (state.firstTime) {
-        getData(setState, `http://65.1.114.106/api/`);
+        getData(setState, "http://65.1.114.106/api/");
       }
       else if (state.data.length === 0) {
         navigate("/users");
@@ -31,9 +31,9 @@ export default function Home() {
       <div>
         {state.data.map((content, i) => {
           if (content.comments.length > 0) {
-            return <MiniThread data={content} key={i} />
+            return <MiniThread data={content} key={i} />;
           }
-          return <Content data={content} key={i} />
+          return <Content data={content} key={i} />;
         })}
       </div>
     </main>

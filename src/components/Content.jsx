@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
 import { RiHeartFill, RiHeartLine, RiMessageLine, RiRepeatLine } from "react-icons/ri";
 import { contentAge } from "../Utils";
 import "./Content.css";
@@ -26,7 +26,7 @@ export default function Content(props) {
   if (props.data.meta.content_type === "retweet") {
     content = <div className="reTweet">
       <div className="contentTop">
-        <a className="namesContent" href={`/profile/${props.data.content.meta.author}`} style={{ cursor: "pointer" }}>
+        <a className="namesContent" href={`/profile/${props.data.content.meta.author}/tweets`} style={{ cursor: "pointer" }}>
           <b>{props.data.content.meta.author_name}</b>
           <div className="username">@{props.data.meta.author}</div>
         </a>
@@ -81,7 +81,7 @@ export default function Content(props) {
           ...state,
           likedByUser: !state.likedByUser,
           likesCount: state.likedByUser ? state.likesCount - 1 : state.likesCount + 1
-        })
+        });
       })
       .catch(
         (error) => {
@@ -91,10 +91,11 @@ export default function Content(props) {
 
   function reTweet() {
     const config = {
-      url: state.retweetedByUser ?
-        `http://65.1.114.106/api/retweet?pk=${props.data.meta.id}` : "http://65.1.114.106/api/retweet",
+      url: state.retweetedByUser
+        ? `http://65.1.114.106/api/retweet?pk=${props.data.meta.id}`
+        : "http://65.1.114.106/api/retweet",
       method: state.retweetedByUser ? "delete" : "post",
-      headers: { "Authorization": `Token ${sessionStorage.token}` },
+      headers: { Authorization: `Token ${sessionStorage.token}` },
       data: { pk: props.data.meta.id }
     };
 
@@ -109,16 +110,21 @@ export default function Content(props) {
   }
 
   return (
-    <div className="content" style={props.thread && !props.last ? { borderBottom: "none" } : {}}>
+    <div className="content" style={props.thread && !props.last || props.thread ? { borderBottom: "none" } : {}}>
       {line}
       <div className="contentContainer">
-        <div className="top">
-          <a className="namesContent" href={`/profile/${props.data.meta.author}`}>
+        <div className="top" style={props.data.meta.content_type === "comment" ? { paddingBottom: "0px" } : {}}>
+          <a className="namesContent" href={`/profile/${props.data.meta.author}/tweets`}>
             <b>{props.data.meta.author_name}</b>
             <div className="username">@{props.data.meta.author}</div>
           </a>
           <div className="contentAge">- {props.data.age}</div>
         </div>
+        <span className="replyingTo" style={props.data.meta.content_type === "comment" ? {} : { display: "none" }}>
+          Replying to <a className="replyingToUsername" href={`/profile/${props.parentUsername}/tweet`}>
+            @{props.parentUsername}
+          </a>
+        </span>
         {content}
         <div id="actions">
           <div className="actionElements" onClick={like}>
@@ -130,10 +136,10 @@ export default function Content(props) {
             <RiRepeatLine size="20px" color={state.retweetedByUser ? "green" : "gray"} />
             <div>{state.retweetCount}</div>
           </div>
-          <div className="actionElements">
+          <a className="actionElements" href={`/content/${props.data.meta.id}`}>
             <RiMessageLine size="20px" color="gray" />
             <div>{props.data.meta.comment_count}</div>
-          </div>
+          </a>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default function getData(setState, url, type) {
+export default function getData(setState: Function, url: string, type: string) {
   const config = {
     method: "get",
     url: url,
@@ -13,6 +13,7 @@ export default function getData(setState, url, type) {
     .then((response) => {
       if (Array.isArray(response.data) && response.data.length > 0) {
         if (type === "thread") {
+          response.data[0].forEach(contentAge);
           response.data[1].forEach(contentAge);
           setState({ firstTime: false, data: response.data[1], parent: response.data[0] });
         }
@@ -28,36 +29,36 @@ export default function getData(setState, url, type) {
     .catch(error => console.log(error));
 }
 
-export function contentAge(content) {
+export function contentAge(content: any) {
   const postedDate = new Date(content.meta.posted_date);
   const now = Date.now();
-  const diffTime = Math.abs(postedDate - now);
+  const diffTime = Math.abs(postedDate.valueOf() - now);
   const diffMinutes = Math.ceil(diffTime / 60000);
   const diffHours = Math.ceil(diffTime / 3600000);
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   const diffMonths = Math.ceil(diffDays / 30);
 
   if (diffMinutes <= 1) {
-    content["age"] = "1 minute ago";
+    content.age = "1 minute ago";
   }
   else if (diffMinutes < 60) {
-    content["age"] = diffMinutes + " minutes ago";
+    content.age = diffMinutes + " minutes ago";
   }
   else if (diffHours < 24) {
-    content["age"] = diffHours + "hours ago";
+    content.age = diffHours + "hours ago";
   }
   else if (diffDays === 1) {
-    content["age"] = "yesterday";
+    content.age = "yesterday";
   }
   else if (diffDays < 30) {
-    content["age"] = diffDays + "days ago";
+    content.age = diffDays + "days ago";
   }
   else if (diffMonths >= 1) {
-    content["age"] = diffMonths + "months ago";
+    content.age = diffMonths + "months ago";
   }
 }
 
-export function fetchData(url, setState, tweets) {
+export function fetchData(url: string, setState: Function, type: string) {
   const config = {
     url: url,
     method: "get",
@@ -66,18 +67,13 @@ export function fetchData(url, setState, tweets) {
 
   axios(config)
     .then((response) => {
-      if (tweets) {
-        response.data.tweets.forEach(contentAge);
-      }
-      else {
-        response.data.likes.forEach(contentAge);
-      }
-      sessionStorage.otherUser = response.data.profile.user;
-      sessionStorage.fullName = response.data.profile.full_name;
+      response.data.content.forEach(contentAge);
       setState({
         firstTime: false,
         profile: response.data.profile,
-        content: tweets ? response.data.tweets : response.data.likes
+        content: response.data.content
       });
+      sessionStorage.otherUser = response.data.profile.user;
+      sessionStorage.fullName = response.data.profile.full_name;
     });
 }

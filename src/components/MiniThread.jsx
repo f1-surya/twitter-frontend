@@ -1,5 +1,5 @@
 import React from "react";
-import {BiMessageRounded} from "react-icons/bi";
+import { BiMessageRounded } from "react-icons/bi";
 import Content from "./Content";
 import "./MiniThread.css";
 
@@ -15,7 +15,7 @@ export default function MiniThread({ data, i }) {
         <div className="comments">
           {data.comments.map(
             (content, i) => <Content data={content} key={i} thread={true}
-              last={data.comments.length - 1 === i} comment={true} />
+              last={data.comments.length - 1 === i} comment={true} parentUsername={data.meta.author} />
           )}
         </div>
       </div>

@@ -1,6 +1,6 @@
-import React from "react";
+import { React } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import './App.css';
+import "./App.css";
 import Thread from "./components/Thread";
 import Layout from "./Layout";
 import Follow from "./pages/Follow";
@@ -18,7 +18,7 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="profile">
-            <Route path=":user" element={<Profile />} />
+            <Route path=":user/:query" element={<Profile />} />
             <Route path=":user/:type" element={<Follow />} />
           </Route>
           <Route path="content/:pk" element={<Thread />} />
