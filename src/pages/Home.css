@@ -4,3 +4,24 @@ main {
   left: 20%;
   background: inherit
 }
+
+@media screen and (max-width: 1300px) {
+  main {
+    width: 70%;
+    left: 10%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  main {
+    width: 90%;
+    left: 10%;
+  }
+}
+
+@media screen and (pointer: coarse) and (hover: none) {
+  main {
+    width: 100%;
+    left: 0;
+  }
+}

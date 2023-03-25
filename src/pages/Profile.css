@@ -117,3 +117,10 @@
   color: white;
   font-size: 20px;
 }
+
+@media screen and (hover: none) and (pointer: coarse) {
+  #edit {
+    width: 80%;
+    left: 7%;
+  }
+}

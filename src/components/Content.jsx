@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { RiHeartFill, RiHeartLine, RiMessageLine, RiRepeatLine } from "react-icons/ri";
 import { contentAge } from "../Utils";
 import "./Content.css";
@@ -26,8 +26,9 @@ export default function Content(props) {
   if (props.data.meta.content_type === "retweet") {
     content = <div className="reTweet">
       <div className="contentTop">
-        <a className="namesContent" href={`/profile/${props.data.content.meta.author}/tweets`} style={{ cursor: "pointer" }}>
-          <b>{props.data.content.meta.author_name}</b>
+        <a className="namesContent" href={`/profile/${props.data.content.meta.author}/tweets`}
+          style={{ cursor: "pointer" }}>
+          <b className="authorName">{props.data.content.meta.author_name}</b>
           <div className="username">@{props.data.meta.author}</div>
         </a>
         <div className="contentAge">- {props.data.content.age}</div>
@@ -110,12 +111,12 @@ export default function Content(props) {
   }
 
   return (
-    <div className="content" style={props.thread && !props.last || props.thread ? { borderBottom: "none" } : {}}>
+    <div className="content" style={props.thread && !props.last ? { borderBottom: "none" } : {}}>
       {line}
       <div className="contentContainer">
         <div className="top" style={props.data.meta.content_type === "comment" ? { paddingBottom: "0px" } : {}}>
           <a className="namesContent" href={`/profile/${props.data.meta.author}/tweets`}>
-            <b>{props.data.meta.author_name}</b>
+            <b className="authorName">{props.data.meta.author_name}</b>
             <div className="username">@{props.data.meta.author}</div>
           </a>
           <div className="contentAge">- {props.data.age}</div>

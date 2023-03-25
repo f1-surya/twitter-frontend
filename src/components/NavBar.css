@@ -1,0 +1,179 @@
+.navBar {
+  background: inherit;
+  position: fixed;
+  z-index: 999;
+  width: 20%;
+  height: 100%;
+  border-right: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navBox {
+  padding-bottom: 50px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.navDestiny {
+  text-align: left;
+  width: max-content;
+  display: flex;
+  justify-content: center;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+.navDestiny:hover {
+  background-color: #333840;
+}
+
+.routes {
+  font-size: 20px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: left;
+}
+
+#search {
+  display: none;
+}
+
+#tweetButton {
+  background: #1DA1F2;
+  color: white;
+  width: 65%;
+  height: 7%;
+  border-radius: 50px;
+  border: none;
+  font-size: 20px;
+  font-family: "Segoe UI Semibold", serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create {
+  display: none;
+}
+
+#formPopup {
+  display: none;
+  left: 25%;
+  width: 40%;
+  top: 100px;
+  position: fixed;
+  border: 1px solid gray;
+  height: fit-content;
+  background: #26292d;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+}
+
+#tweetBox {
+  width: 80%;
+  background: inherit;
+  padding: 10px;
+  color: white;
+  font-size: 22px;
+  border: 0;
+  resize: none;
+  border-bottom: 1px solid gray;
+}
+
+#tweetBox:focus {
+  outline: 0;
+}
+
+.buttons {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+#post {
+  background: #1DA1F2;
+  color: white;
+  width: 13%;
+  min-width: fit-content;
+  height: 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+::placeholder {
+  color: white;
+}
+
+#buttonClose {
+  background: #26292d;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+@media screen and (max-width: 1500px) {
+  .navBar {
+    width: 10vw;
+    min-width: 70px;
+  }
+  .routes {
+    display: none;
+  }
+  .createTweet {
+    display: none;
+  }
+  .create {
+    display: block;
+  }
+}
+
+@media screen and (pointer: coarse) and (hover: none) {
+  .navBar {
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 7vh;
+    bottom: 0;
+    width: 100vw;
+  }
+
+  .navLogo {
+    display: none;
+  }
+
+  .navBox {
+    flex-direction: row;
+    padding: 0;
+    width: 100vw;
+    justify-content: space-around;
+  }
+
+  #search {
+    display: block;
+  }
+
+  #tweetButton {
+    width: 7vh;
+    height: 7vh;
+    position: fixed;
+    bottom: 10vh;
+    right: 2vh;
+  }
+
+  #formPopup {
+    width: fit-content;
+    left: 8%;
+  }
+}

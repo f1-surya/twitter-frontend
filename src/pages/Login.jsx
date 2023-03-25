@@ -1,33 +1,25 @@
 import axios from "axios";
-import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../logo.svg";
 import "./Login.css";
 
 export default function Login() {
   let navigate = useNavigate();
-  const [credentials, setCredentials] = useState(true);
-
-  function handleLoginCredentials(e) {
-    setCredentials(!(!(!document.getElementById("userName").value)
-      && !(!document.getElementById("password").value)));
-  }
 
   function login() {
     const userName = document.getElementById("userName").value;
     const password = document.getElementById("password").value;
-    sessionStorage.username = userName;
+    if (userName && password) {
+      sessionStorage.username = userName;
+      const config = {
+        method: "post",
+        url: "http://65.1.114.106/api/login",
+        data: {
+          username: userName,
+          password: password
+        }
+      };
 
-    const config = {
-      method: "post",
-      url: "http://65.1.114.106/api/login",
-      data: {
-        username: userName,
-        password: password
-      }
-    };
-
-    if (sessionStorage.token === undefined) {
       axios(config)
         .then((response) => {
           sessionStorage.token = response.data["token"];
@@ -36,6 +28,9 @@ export default function Login() {
         .catch((error) => {
           console.log(error.data);
         });
+    }
+    else {
+      alert("Please fill all the fields");
     }
   }
 
@@ -51,23 +46,21 @@ export default function Login() {
       <div id="input">
         <div id="container">
           <input className="loginCredentials" id="userName"
-            type="text" placeholder="Username"
-            onChange={handleLoginCredentials} />
+            type="text" placeholder="Username" />
         </div>
         <div id="container">
           <input className="loginCredentials" id="password"
-            type="password" placeholder="Password"
-            onChange={handleLoginCredentials} />
+            type="password" placeholder="Password" />
         </div>
         <div id="container">
           <button className="button" type="submit"
-            onClick={login} disabled={credentials}>
+            onClick={login}>
             Login
           </button>
         </div>
       </div>
       <div id="createAccount">Don&apos;t have an account?
-        <a id="signUp" href="signUp/names"> Sign up</a>
+        <a id="signUp" href="signUp"> Sign up</a>
       </div>
     </div>
   );

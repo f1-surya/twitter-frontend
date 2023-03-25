@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { HiArrowLeft } from "react-icons/hi";
 import { useParams } from "react-router-dom";
 import getData from "../Utils";
@@ -54,14 +54,12 @@ export default function Thread() {
     element.style.height = (element.scrollHeight) + "px";
   }
 
-  function back() {
-    window.history.back();
-  }
+  const back = () => window.history.back();
 
   document.title = `${state.parent[state.parent.length - 1].meta.author_name} on Twitter`;
 
   return (
-    <div className="wrapper">
+    <main className="wrapper">
       <div className="back" onClick={back}>
         <HiArrowLeft size={"25px"} />
       </div>
@@ -85,6 +83,6 @@ export default function Thread() {
         {state.data.map((comment, i) => (<Content data={comment} key={i}
           parentUsername={state.parent[state.parent.length - 1].meta.author} />))}
       </div>
-    </div>
+    </main>
   );
 }

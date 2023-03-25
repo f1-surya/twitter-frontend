@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { HiArrowLeft } from "react-icons/hi";
-import { useNavigate, useParams } from "react-router-dom";
 import ProfileGlance from "../components/ProfileGlance";
 import getData from "../Utils";
 import "./Follow.css";
 
-export default function Follow() {
-  const { user, type } = useParams();
+export default function Follow({user, type}) {
   const [state, setState] = useState({ firstTime: true, data: [] });
-  const navigate = useNavigate();
+  const back = () => window.history.back();
 
   useEffect(() => {
     getData(setState, `http://65.1.114.106/api/profile?query=${type}&username=${user}`, "profile");
   }, [setState, type, user]);
-
-  function back() {
-    navigate(`/profile/${user}`);
-  }
 
   return (
     <main>
@@ -46,4 +40,4 @@ export default function Follow() {
       </div>
     </main>
   );
-}
+} 

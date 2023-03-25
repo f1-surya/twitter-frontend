@@ -1,17 +1,15 @@
-import { React } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Thread from "./components/Thread";
 import Layout from "./Layout";
-import Follow from "./pages/Follow";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import { SignUp, Username, Password } from "./pages/SignUp";
+import Search from "./pages/Search";
+import SignUp from "./pages/SignUp";
 import UserList from "./pages/UserList";
 
 export default function App() {
-
   return (
     <BrowserRouter>
       <Routes>
@@ -19,16 +17,13 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="profile">
             <Route path=":user/:query" element={<Profile />} />
-            <Route path=":user/:type" element={<Follow />} />
           </Route>
           <Route path="content/:pk" element={<Thread />} />
           <Route path="users" element={<UserList />} />
+          <Route path="/search" element={<Search />} />
         </Route>
         <Route path="/login" element={<Login />} />
-        <Route path="/signUp" element={<SignUp />}>
-          <Route path="names" element={<Username />} />
-          <Route path="password" element={<Password />} />
-        </Route>
+        <Route path="/signUp" element={<SignUp />} />
       </Routes>
     </BrowserRouter>
   );

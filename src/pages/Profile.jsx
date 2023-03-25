@@ -1,10 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiArrowLeft } from "react-icons/hi";
 import { useParams } from "react-router-dom";
 import Content from "../components/Content";
 import { fetchData } from "../Utils";
+import Follow from "./Follow";
 import "./Profile.css";
 
 function reducer(state, action) {
@@ -34,6 +35,13 @@ export default function Profile() {
   const [edit, dispatch] = useReducer(reducer, { firstName: "", lastName: "", about: "", });
   const { user, query } = useParams();
   const self = user === sessionStorage.username;
+  const back = () => window.history.back();
+  const handleInput = (event) => dispatch({ type: event.target.id, newValue: event.target.value });
+  const closeEdit = () => document.getElementById("edit").style.display = "none";
+
+  if (query === "followers" || query === "following") {
+    return <Follow user={user} type={query} />;
+  }
 
   useEffect(() => {
     switch (query) {
@@ -114,17 +122,6 @@ export default function Profile() {
     color: "white"
   };
 
-  function back() {
-    window.history.back();
-  }
-
-  function handleInput(event) {
-    dispatch({ type: event.target.id, newValue: event.target.value });
-  }
-
-  function closeEdit() {
-    document.getElementById("edit").style.display = "none";
-  }
 
   function focus(event) {
     if (event.target.id === "firstName") {

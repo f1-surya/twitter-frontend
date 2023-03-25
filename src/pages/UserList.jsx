@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from "react";
+import { useEffect, useState } from "react";
+import ProfileGlance from "../components/ProfileGlance";
 import getData from "../Utils";
 import "./UserList.css";
-import ProfileGlance from "../components/ProfileGlance";
 
 export default function UserList() {
   const [state, setState] = useState({firstTime: true, data: []});

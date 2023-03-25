@@ -1,4 +1,3 @@
-import React from "react";
 import { BiMessageRounded } from "react-icons/bi";
 import Content from "./Content";
 import "./MiniThread.css";

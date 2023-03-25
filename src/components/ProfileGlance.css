@@ -28,4 +28,5 @@
   border: none;
   border-radius: 20px;
   font-weight: bolder;
+  min-width: fit-content;
 }

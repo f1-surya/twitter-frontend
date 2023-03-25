@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { RiHeartFill, RiHeartLine, RiMessageLine, RiRepeatLine } from "react-icons/ri";
 import { contentAge } from "../Utils";
 import "./ThreadTop.css";
@@ -16,7 +16,7 @@ export default function ThreadTop(props: any) {
       <div className="contentTop">
         <a className="namesContent" href={`/profile/${state.content.meta.author}/tweet`}
           style={{ cursor: "pointer" }}>
-          <b>{state.content.meta.author_name}</b>
+          <b className="authorName">{state.content.meta.author_name}</b>
           <div className="username">@{state.content.meta.author}</div>
         </a>
         <div className="contentAge">- {state.content.age}</div>

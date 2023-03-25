@@ -1,20 +1,15 @@
-import React from "react";
 import axios from "axios";
-import { CgHome, CgLogOut, CgProfile } from "react-icons/cg";
+import { AiOutlineClose } from "react-icons/ai";
+import { CgHome, CgLogOut, CgProfile, CgSearch } from "react-icons/cg";
+import { MdOutlineCreate } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import logo from "../logo.svg";
-import "./LeftNavBar.css";
+import "./NavBar.css";
 
-export default function LeftNavBar() {
+export default function NavBar() {
   const navigate = useNavigate();
-
-  function openTweetForm() {
-    document.getElementById("formPopup").style.display = "block";
-  }
-
-  function closeTweetForm() {
-    document.getElementById("formPopup").style.display = "none";
-  }
+  const openTweetForm = () => document.getElementById("formPopup").style.display = "flex";
+  const closeTweetForm = () => document.getElementById("formPopup").style.display = "none";
 
   function post() {
     const tweet = document.getElementById("tweetBox").value;
@@ -63,34 +58,43 @@ export default function LeftNavBar() {
   }
 
   return (
-    <header className="layout" id="leftNavBar">
-      <div>
+    <header className="navBar">
+      <div className="navLogo">
         <img src={logo} alt="Logo" />
       </div>
       <div className="navBox">
         <a className="navDestiny" href="/">
-          <CgHome size="22px" />
+          <CgHome size="24px" />
           <b className="routes">Home</b>
         </a>
         <a className="navDestiny" href={`/profile/${sessionStorage.username}/tweets`}>
-          <CgProfile size="23px" />
+          <CgProfile size="25px" />
           <b className="routes">Profile</b>
         </a>
+        <a className="navDestiny" href="/search" id="search">
+          <CgSearch size="25px" />
+        </a>
         <div className="navDestiny" onClick={logout}>
-          <CgLogOut size="23px" />
+          <CgLogOut size="25px" />
           <b className="routes">LogOut</b>
         </div>
       </div>
-      <button id="tweetButton" type="button" onClick={openTweetForm}>Tweet</button>
+      <button id="tweetButton" type="button" onClick={openTweetForm}>
+        <MdOutlineCreate className="create" />
+        <span className="createTweet">Tweet</span>
+      </button>
       <div id="formPopup">
+        <div className="buttons">
+          <button id="buttonClose" type="button" onClick={closeTweetForm}>
+            <AiOutlineClose size="25px" />
+          </button>
+        </div>
         <textarea id="tweetBox" type="text"
           placeholder="What's happening?" name="Tweet"
           onChange={adjustHeight} />
-        <br />
-        <button id="post" type="button" onClick={post}>Post</button>
-        <br />
-        <button id="buttonClose" type="button" onClick={closeTweetForm}>Close</button>
-        <br />
+        <div style={{display: "flex", justifyContent: "flex-end", width: "90%", padding: "10px"}}>
+          <button id="post" type="button" onClick={post}>Tweet</button>
+        </div>
       </div>
     </header>
   );

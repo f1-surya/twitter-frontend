@@ -2,9 +2,15 @@
   background-color: #282c34;
   color: white;
   text-align: center;
-  padding: 80px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#backWrapper {
+  width: 100%;
+  text-align: left;
 }
 
 #title {
@@ -14,14 +20,15 @@
 }
 
 .container {
-  padding: 39px;
+  padding: 10%;
 }
 
 #border {
-  padding: 20px;
   border: 1px solid gray;
   border-radius: 15px;
-  width: 45%;
+  width: fit-content;
+  height: fit-content;
+  padding: 5%;
 }
 
 .input {
@@ -30,7 +37,7 @@
   color: white;
   font-size: 20px;
   border: none;
-  width: 65%;
+  width: 100%;
   border-bottom: 1px solid white;
 }
 
@@ -40,23 +47,16 @@
 
 .signUpButton {
   height: 45px;
-  width: 15%;
+  width: 50%;
   font-size: medium;
   background: #1DA1F2;
   color: white;
   border-radius: 10px;
   border: none;
-}
-
-#createAccount {
-  padding: 5px;
+  margin: 10px;
 }
 
 #signUp {
   color: #1DA1F2;
   text-decoration: none;
-}
-
-#logo {
-  padding: 5px;
 }
