@@ -5,7 +5,7 @@ It's not 100% yet.
 
 ![SignUp screen-1](https://github.com/TechDash/twitter-frontend/blob/main/screenshots/signup.png)
 
-![SignUp screen-2](https://github.com/TechDash/twitter-frontend/blob/main/screenshots/signu2.png)
+![SignUp screen-2](https://github.com/TechDash/twitter-frontend/blob/main/screenshots/signup2.png)
 
 ![Home page](https://github.com/TechDash/twitter-frontend/blob/main/screenshots/home.png)
 
