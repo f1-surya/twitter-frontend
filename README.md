@@ -1,14 +1,14 @@
 I created a twitter like front-end using Reactjs for learning purposes.
 It's not 100% yet.
 
-![alt text](https://github.com/techdash/twitter-frontend/blob/main/screenshots/login.png, "Login screen")
+![Login screen](https://github.com/TechDash/twitter-frontend/blob/main/screenshots/login.png)
 
-![alt text](https://github.com/techdash/twitter-frontend/blob/main/screenshots/signup.png, "SignUp screen-1")
+![SignUp screen-1](https://github.com/TechDash/twitter-frontend/blob/main/screenshots/signup.png)
 
-![alt text](https://github.com/techdash/twitter-frontend/blob/main/screenshots/signu2.png, "SignUp screen-2")
+![SignUp screen-2](https://github.com/TechDash/twitter-frontend/blob/main/screenshots/signu2.png)
 
-![alt text](https://github.com/techdash/twitter-frontend/blob/main/screenshots/home.png, "Home page")
+![Home page](https://github.com/TechDash/twitter-frontend/blob/main/screenshots/home.png)
 
-![alt text](https://github.com/techdash/twitter-frontend/blob/main/screenshots/thread.png, "Thread")
+![Thread](https://github.com/TechDash/twitter-frontend/blob/main/screenshots/thread.png)
 
-![alt text](https://github.com/techdash/twitter-frontend/blob/main/screenshots/profile.png, "Profile page")
+![Profile page](https://github.com/TechDash/twitter-frontend/blob/main/screenshots/profile.png)
